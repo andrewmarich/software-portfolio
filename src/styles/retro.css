@@ -141,8 +141,9 @@
   font-family: var(--font-pixel);
   font-size: 0.5rem;
   letter-spacing: 0.05em;
-  padding: 0.25rem 0.5rem;
-  border: 1px solid var(--color-screen-raised);
+  padding: 0.3rem 0.6rem;
+  border: 1px solid color-mix(in oklch, var(--color-screen-raised), transparent 20%);
+  background: color-mix(in oklch, var(--color-screen-panel), transparent 60%);
   color: var(--color-text-muted);
   transition: all 0.2s ease;
 }
@@ -150,4 +151,5 @@
 .pixel-tag:hover {
   color: var(--color-glow-amber);
   border-color: color-mix(in oklch, var(--color-glow-amber), transparent 60%);
+  background: color-mix(in oklch, var(--color-glow-amber), transparent 92%);
 }

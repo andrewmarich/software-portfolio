@@ -85,10 +85,18 @@ const colorMap = {
             >
               <div class="flex flex-col lg:flex-row gap-6">
                 <!-- Project image placeholder -->
-                <div class="crt-hover rounded-md overflow-hidden bg-screen-dark border border-screen-raised
-                            w-full lg:w-72 h-44 lg:h-auto lg:aspect-video shrink-0">
-                  <div class="w-full h-full flex items-center justify-center text-text-faint font-mono text-xs">
-                    [ screenshot ]
+                <div class="crt-hover rounded-md overflow-hidden bg-screen-dark border border-screen-raised/50
+                            w-full lg:w-72 h-44 lg:h-auto lg:aspect-video shrink-0 relative">
+                  <div class="absolute inset-0 bg-gradient-to-br from-screen-panel via-screen-dark to-screen-void opacity-80"></div>
+                  <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="flex flex-col items-center gap-2">
+                      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" class="text-text-faint/50">
+                        <rect x="2" y="3" width="20" height="14" rx="2" />
+                        <line x1="8" y1="21" x2="16" y2="21" />
+                        <line x1="12" y1="17" x2="12" y2="21" />
+                      </svg>
+                      <span class="font-pixel text-[5px] text-text-faint/40 tracking-wider uppercase">preview</span>
+                    </div>
                   </div>
                 </div>
 

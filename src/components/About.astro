@@ -12,10 +12,14 @@
     <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
       <!-- Photo column -->
       <div class="lg:col-span-2 flex justify-center lg:justify-start">
-        <div class="crt-vignette rounded-lg overflow-hidden w-64 h-64 lg:w-full lg:h-auto lg:aspect-square bg-screen-panel border border-screen-raised">
-          <!-- Placeholder for photo -->
-          <div class="w-full h-full flex items-center justify-center text-text-faint font-mono text-xs">
-            [ photo ]
+        <div class="crt-vignette rounded-lg overflow-hidden w-64 h-64 lg:w-full lg:h-auto lg:aspect-square bg-screen-panel border border-screen-raised/50 relative">
+          <!-- Gradient placeholder until real photo -->
+          <div class="absolute inset-0 bg-gradient-to-br from-screen-panel via-screen-dark to-screen-void"></div>
+          <div class="absolute inset-0 flex flex-col items-center justify-center gap-3">
+            <div class="w-16 h-16 rounded-full border border-screen-raised/50 bg-screen-dark flex items-center justify-center">
+              <span class="font-mono text-glow-amber text-xl">AM</span>
+            </div>
+            <span class="font-pixel text-[6px] text-text-faint tracking-wider uppercase">Player 1</span>
           </div>
         </div>
       </div>
@@ -23,12 +27,12 @@
       <!-- Bio column -->
       <div class="lg:col-span-3">
         <!-- Pull quote -->
-        <blockquote class="font-mono text-glow-amber text-sm mb-8 pl-4 border-l-2 border-glow-amber/30">
+        <blockquote class="font-mono text-glow-amber text-sm mb-8 pl-4 border-l-2 border-glow-amber/50 leading-relaxed">
           "I thrive on untangling complex problems and designing elegant,
           scalable systems."
         </blockquote>
 
-        <div class="space-y-4 text-text-muted leading-relaxed">
+        <div class="space-y-5 text-text-muted leading-relaxed">
           <p>
             I'm a full-stack engineer based in Gilbert, Arizona with a
             path that's anything but typical. I started in

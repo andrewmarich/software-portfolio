@@ -8,6 +8,7 @@ import Experience from "../components/Experience.astro";
 import Skills from "../components/Skills.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import SectionDivider from "../components/SectionDivider.astro";
 import BootSequence from "../islands/BootSequence";
 ---
 
@@ -18,19 +19,29 @@ import BootSequence from "../islands/BootSequence";
   <Nav />
   <main class="pt-14">
     <Hero />
+
     <div class="reveal-section">
+      <SectionDivider />
       <About />
     </div>
+
     <div class="reveal-section">
+      <SectionDivider />
       <Projects />
     </div>
+
     <div class="reveal-section">
+      <SectionDivider />
       <Experience />
     </div>
+
     <div class="reveal-section">
+      <SectionDivider />
       <Skills />
     </div>
+
     <div class="reveal-section">
+      <SectionDivider />
       <Contact />
     </div>
   </main>
@@ -38,11 +49,10 @@ import BootSequence from "../islands/BootSequence";
 </Base>
 
 <style>
-  /* Scroll-triggered reveal animation */
   .reveal-section {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
   }
 
   .reveal-section.visible {
@@ -61,7 +71,7 @@ import BootSequence from "../islands/BootSequence";
         }
       });
     },
-    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+    { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
   );
 
   document.querySelectorAll(".reveal-section").forEach((el) => {
