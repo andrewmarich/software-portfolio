@@ -52,7 +52,9 @@ export default function ScrollProgress() {
     >
       <span
         className={`text-[8px] transition-colors duration-300 ${
-          levelUp ? "text-[var(--color-glow-amber)]" : "text-[var(--color-text-faint)]"
+          levelUp
+            ? "text-[var(--color-glow-amber)]"
+            : "text-[var(--color-text-faint)]"
         }`}
       >
         {level.label}
@@ -64,11 +66,7 @@ export default function ScrollProgress() {
             key={i}
             className={`inline-block w-1.5 h-2.5 transition-colors duration-150 ${
               i < filled
-                ? progress > 60
-                  ? "bg-[var(--color-phosphor)]"
-                  : progress > 30
-                    ? "bg-[var(--color-glow-amber)]"
-                    : "bg-[var(--color-neon-cyan)]"
+                ? "bg-[var(--color-glow-amber)]"
                 : "bg-[var(--color-screen-raised)]"
             }`}
           />
