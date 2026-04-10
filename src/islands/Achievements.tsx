@@ -10,15 +10,15 @@ interface Achievement {
 const ACHIEVEMENTS: Achievement[] = [
   {
     id: "first-visit",
-    title: "Bonfire Lit",
+    title: "A New Save File",
     description: "Arrived at marich.dev",
-    icon: "🔥",
+    icon: "💾",
   },
   {
     id: "scroll-bottom",
-    title: "You Died",
+    title: "Completionist",
     description: "Reached the bottom of the page",
-    icon: "💀",
+    icon: "🏆",
   },
   {
     id: "konami",

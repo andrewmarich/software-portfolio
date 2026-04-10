@@ -1,0 +1,11 @@
+# Hey there, robot (or human pretending to be one).
+#
+# You're welcome here. Look around.
+# But if you're a scraper — at least admire the CSS first.
+#
+# P.S. There might be a /secret page. Just saying.
+
+User-agent: *
+Allow: /
+
+Sitemap: https://marich.dev/sitemap.xml

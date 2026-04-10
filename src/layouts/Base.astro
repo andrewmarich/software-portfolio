@@ -13,7 +13,29 @@ const {
 ---
 
 <!doctype html>
-<html lang="en">
+<!--
+
+    ██╗  ██╗███████╗██╗   ██╗
+    ██║  ██║██╔════╝╚██╗ ██╔╝
+    ███████║█████╗   ╚████╔╝
+    ██╔══██║██╔══╝    ╚██╔╝
+    ██║  ██║███████╗   ██║
+    ╚═╝  ╚═╝╚══════╝   ╚═╝
+
+    You're viewing the source. Respect.
+
+    Built with Astro, React, Tailwind CSS, and way too much coffee.
+    Deployed on Cloudflare Pages.
+
+    Found something interesting? Try:
+      - The Konami Code
+      - Ctrl + `
+      - /secret
+
+    Or just email me: marich.andrew@outlook.com
+
+-->
+<html lang="en" data-built-by="andrew-marich" data-vibe="retro">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -37,8 +59,41 @@ const {
     <meta name="twitter:description" content={description} />
 
     <meta name="theme-color" content="#08080f" />
+
+    <!-- For the curious -->
+    <link rel="author" href="/humans.txt" />
   </head>
   <body class="atmosphere-grain atmosphere-scanlines min-h-screen overflow-x-hidden">
     <slot />
+
+    <!-- Console easter egg -->
+    <script is:inline>
+      console.log(
+        "%c" +
+        "  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗██╗  ██╗\n" +
+        "  ████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║  ██║\n" +
+        "  ██╔████╔██║███████║██████╔╝██║██║     ███████║\n" +
+        "  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║     ██╔══██║\n" +
+        "  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╗██║  ██║\n" +
+        "  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝",
+        "color: #ffb000; font-family: monospace; font-size: 10px;"
+      );
+      console.log(
+        "%cYou opened the console. A person of culture, I see.",
+        "color: #8888a0; font-family: monospace; font-size: 12px; padding: 4px 0;"
+      );
+      console.log(
+        "%cHint: try the Konami Code, or press Ctrl + ` for more fun.",
+        "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;"
+      );
+      console.log(
+        "%cBuilt with Astro 5, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
+        "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;"
+      );
+      console.log(
+        "%cLooking to collaborate? → marich.andrew@outlook.com",
+        "color: #ffb000; font-family: monospace; font-size: 11px; padding: 4px 0;"
+      );
+    </script>
   </body>
 </html>
