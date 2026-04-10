@@ -1,4 +1,6 @@
 ---
+import ScrollProgress from "../islands/ScrollProgress";
+
 const links = [
   { href: "#about", label: "About" },
   { href: "#projects", label: "Projects" },
@@ -32,6 +34,7 @@ const links = [
           </a>
         ))
       }
+      <ScrollProgress client:load />
     </div>
 
     <!-- Mobile menu button -->

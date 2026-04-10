@@ -8,17 +8,63 @@ import Experience from "../components/Experience.astro";
 import Skills from "../components/Skills.astro";
 import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
+import BootSequence from "../islands/BootSequence";
 ---
 
 <Base>
+  <!-- Boot sequence — client:load for immediate render -->
+  <BootSequence client:load />
+
   <Nav />
   <main class="pt-14">
     <Hero />
-    <About />
-    <Projects />
-    <Experience />
-    <Skills />
-    <Contact />
+    <div class="reveal-section">
+      <About />
+    </div>
+    <div class="reveal-section">
+      <Projects />
+    </div>
+    <div class="reveal-section">
+      <Experience />
+    </div>
+    <div class="reveal-section">
+      <Skills />
+    </div>
+    <div class="reveal-section">
+      <Contact />
+    </div>
   </main>
   <Footer />
 </Base>
+
+<style>
+  /* Scroll-triggered reveal animation */
+  .reveal-section {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+  );
+
+  document.querySelectorAll(".reveal-section").forEach((el) => {
+    observer.observe(el);
+  });
+</script>
