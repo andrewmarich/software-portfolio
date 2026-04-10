@@ -1,0 +1,153 @@
+/*
+ * Retro effect utilities
+ * CRT hover effects, glow states, blinking cursor,
+ * pixel borders, and terminal-style accents.
+ */
+
+/* Blinking cursor — amber terminal style */
+.cursor-blink::after {
+  content: "█";
+  color: var(--color-glow-amber);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* CRT vignette — darkened edges like a CRT monitor */
+.crt-vignette {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+/* CRT scanline hover — applied to project images */
+.crt-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+}
+
+.crt-hover:hover::before {
+  opacity: 1;
+}
+
+.crt-hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+.crt-hover:hover::after {
+  opacity: 1;
+}
+
+/* Glow hover — amber accent glow on interactive elements */
+.glow-hover {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px color-mix(in oklch, var(--color-glow-amber), transparent 75%);
+  border-color: color-mix(in oklch, var(--color-glow-amber), transparent 50%);
+}
+
+/* Glow hover — cyan variant */
+.glow-hover--cyan:hover {
+  box-shadow: 0 0 20px color-mix(in oklch, var(--color-neon-cyan), transparent 75%);
+  border-color: color-mix(in oklch, var(--color-neon-cyan), transparent 50%);
+}
+
+/* Glow text — subtle text glow effect */
+.glow-text {
+  text-shadow: 0 0 10px currentColor;
+}
+
+.glow-text--amber {
+  text-shadow: 0 0 10px var(--color-glow-amber), 0 0 30px color-mix(in oklch, var(--color-glow-amber), transparent 70%);
+}
+
+/* Ambient underline glow for links */
+.glow-underline {
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-glow-amber), var(--color-glow-amber));
+  background-size: 0% 1px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.glow-underline:hover {
+  background-size: 100% 1px;
+  text-shadow: 0 0 8px color-mix(in oklch, var(--color-glow-amber), transparent 60%);
+}
+
+/* Pixel border — 1px solid with retro feel */
+.pixel-border {
+  border: 1px solid var(--color-screen-raised);
+  image-rendering: pixelated;
+}
+
+/* Terminal prompt prefix */
+.terminal-prompt::before {
+  content: "> ";
+  color: var(--color-glow-amber);
+  font-family: var(--font-mono);
+}
+
+/* Section header style */
+.section-header {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Pixel tag — tiny Press Start 2P labels */
+.pixel-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.5rem;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--color-screen-raised);
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+}
+
+.pixel-tag:hover {
+  color: var(--color-glow-amber);
+  border-color: color-mix(in oklch, var(--color-glow-amber), transparent 60%);
+}

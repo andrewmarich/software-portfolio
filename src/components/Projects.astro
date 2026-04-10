@@ -1,0 +1,132 @@
+---
+interface Project {
+  name: string;
+  description: string;
+  role: string;
+  metric?: string;
+  tags: string[];
+  color: "amber" | "cyan" | "magenta";
+}
+
+const projects: Project[] = [
+  {
+    name: "Balance",
+    description:
+      "HIPAA-compliant medical accounts receivable platform. Streamlines billing, payment collection, and patient communication for healthcare providers.",
+    role: "Architect & Lead Developer",
+    metric: "30% → 70% 30-day collections",
+    tags: ["React 19", "TanStack", "Cloudflare Workers", "Drizzle ORM", "PostgreSQL", "Stripe", "Twilio"],
+    color: "cyan",
+  },
+  {
+    name: "B1 Marketing Platform",
+    description:
+      "Enterprise lead intake and routing system for legal services. Captures, validates, enriches, and routes qualified leads across a multi-vendor ecosystem.",
+    role: "Full-Stack Engineer",
+    tags: ["Django", "HTMX", "PostgreSQL", "Django-Q2", "AWS", "Docker", "Terraform"],
+    color: "amber",
+  },
+  {
+    name: "marich.dev",
+    description:
+      "This portfolio — built to demonstrate engineering judgment. Static-first architecture with interactive islands, deployed to the edge.",
+    role: "Solo Developer",
+    tags: ["Astro", "React", "Tailwind CSS", "Cloudflare Pages", "TypeScript"],
+    color: "magenta",
+  },
+];
+
+const colorMap = {
+  amber: {
+    border: "border-glow-amber/20 hover:border-glow-amber/40",
+    glow: "hover:shadow-[0_0_30px_rgba(255,176,0,0.08)]",
+    text: "text-glow-amber",
+    dot: "bg-glow-amber",
+  },
+  cyan: {
+    border: "border-neon-cyan/20 hover:border-neon-cyan/40",
+    glow: "hover:shadow-[0_0_30px_rgba(0,229,255,0.08)]",
+    text: "text-neon-cyan",
+    dot: "bg-neon-cyan",
+  },
+  magenta: {
+    border: "border-neon-magenta/20 hover:border-neon-magenta/40",
+    glow: "hover:shadow-[0_0_30px_rgba(255,45,111,0.08)]",
+    text: "text-neon-magenta",
+    dot: "bg-neon-magenta",
+  },
+};
+---
+
+<section id="projects" class="relative py-24 lg:py-32">
+  <!-- Ambient glow -->
+  <div
+    class="glow-pool glow-pool--amber"
+    style="width: 600px; height: 600px; top: 50%; right: -200px; transform: translateY(-50%);"
+  >
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Section header -->
+    <p class="section-header mb-12">
+      <span class="text-glow-amber">&gt;</span> ls projects/
+    </p>
+
+    <!-- Project cards — staggered layout -->
+    <div class="space-y-8">
+      {
+        projects.map((project, i) => {
+          const colors = colorMap[project.color];
+          const offset = i % 2 === 1 ? "lg:ml-16" : "";
+          return (
+            <article
+              class={`relative bg-screen-panel/50 border rounded-lg p-6 lg:p-8
+                       transition-all duration-300 ${colors.border} ${colors.glow} ${offset}`}
+            >
+              <div class="flex flex-col lg:flex-row gap-6">
+                <!-- Project image placeholder -->
+                <div class="crt-hover rounded-md overflow-hidden bg-screen-dark border border-screen-raised
+                            w-full lg:w-72 h-44 lg:h-auto lg:aspect-video shrink-0">
+                  <div class="w-full h-full flex items-center justify-center text-text-faint font-mono text-xs">
+                    [ screenshot ]
+                  </div>
+                </div>
+
+                <!-- Project info -->
+                <div class="flex-1 min-w-0">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class={`w-2 h-2 rounded-full ${colors.dot}`} />
+                    <h3 class={`font-semibold text-xl ${colors.text}`}>
+                      {project.name}
+                    </h3>
+                  </div>
+
+                  <p class="font-mono text-xs text-text-faint mb-3 uppercase tracking-wider">
+                    {project.role}
+                  </p>
+
+                  <p class="text-text-muted leading-relaxed mb-4">
+                    {project.description}
+                  </p>
+
+                  {project.metric && (
+                    <p class="font-mono text-sm text-phosphor mb-4">
+                      ↑ {project.metric}
+                    </p>
+                  )}
+
+                  <!-- Tech tags -->
+                  <div class="flex flex-wrap gap-2">
+                    {project.tags.map((tag) => (
+                      <span class="pixel-tag rounded">{tag}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </article>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

@@ -1,0 +1,159 @@
+---
+interface Role {
+  company: string;
+  title: string;
+  period: string;
+  location: string;
+  bullets: string[];
+}
+
+const roles: Role[] = [
+  {
+    company: "B1 Marketing Group",
+    title: "Full-Stack Engineer | Cloud & Infrastructure",
+    period: "Jul 2025 — Present",
+    location: "Gilbert, AZ",
+    bullets: [
+      "Architected company technology infrastructure from the ground up — deploying Microsoft 365, establishing IAM, and building a secure, scalable foundation.",
+      "Designs and develops full-stack internal tooling and custom integrations across CRM, communications, document signing, and lead validation systems.",
+      "Built the automation and API integration layer powering the lead generation pipeline, reducing manual overhead and improving data fidelity.",
+      "Owns frontend development and UI/UX design while serving as the team's primary code reviewer.",
+    ],
+  },
+  {
+    company: "Andrew Marich",
+    title: "Web Developer",
+    period: "Aug 2020 — Present",
+    location: "Greater Phoenix Area",
+    bullets: [
+      "Architecting Balance, a HIPAA-compliant medical A/R platform built on React, TanStack, and Google Cloud — increasing client 30-day collections from 30% to 70%.",
+      "Delivers custom web solutions for small business clients, managing full project lifecycles from discovery through deployment.",
+      "Improved client web traffic by an average of 2x through SEO strategies including content optimization and meta tagging.",
+    ],
+  },
+  {
+    company: "Devize",
+    title: "Product Builder",
+    period: "Oct 2024 — Jul 2025",
+    location: "Gilbert, AZ",
+    bullets: [
+      "Led the end-to-end product lifecycle for 7+ client-facing web applications, from initial discovery to final deployment.",
+      "Engineered back-end solutions including relational data schemas, auth flows, and third-party API integrations (Stripe, Twilio, GCP).",
+      "Directed ongoing product maintenance via project backlogs in Notion and Linear, performing systematic bug triage.",
+    ],
+  },
+];
+
+interface Education {
+  school: string;
+  degree: string;
+  year: string;
+}
+
+const education: Education[] = [
+  {
+    school: "Western Governors University",
+    degree: "BS, Computer Science",
+    year: "2024",
+  },
+  {
+    school: "University of Arizona",
+    degree: "BS, Finance",
+    year: "2019",
+  },
+];
+
+const certifications = ["Linux Essentials", "ITIL Foundation"];
+---
+
+<section id="experience" class="relative py-24 lg:py-32">
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Section header -->
+    <p class="section-header mb-12">
+      <span class="text-glow-amber">&gt;</span> experience
+    </p>
+
+    <!-- Timeline -->
+    <div class="relative">
+      <!-- Timeline line -->
+      <div
+        class="absolute left-[7px] top-2 bottom-2 w-px hidden lg:block"
+        style="background: repeating-linear-gradient(
+          to bottom,
+          var(--color-screen-raised) 0px,
+          var(--color-screen-raised) 4px,
+          transparent 4px,
+          transparent 8px
+        );"
+      >
+      </div>
+
+      <div class="space-y-12">
+        {
+          roles.map((role) => (
+            <div class="relative lg:pl-10">
+              {/* Timeline node — amber LED */}
+              <div class="hidden lg:block absolute left-0 top-1.5 w-[15px] h-[15px]">
+                <div class="w-full h-full rounded-full bg-screen-dark border-2 border-glow-amber/50" />
+                <div class="absolute inset-1 rounded-full bg-glow-amber/30" />
+              </div>
+
+              {/* Role content */}
+              <div>
+                <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-3 mb-1">
+                  <h3 class="text-text-bright font-semibold text-lg">
+                    {role.company}
+                  </h3>
+                  <span class="font-mono text-xs text-text-faint">
+                    {role.period}
+                  </span>
+                </div>
+
+                <p class="font-mono text-sm text-glow-amber/80 mb-1">
+                  {role.title}
+                </p>
+                <p class="text-text-faint text-sm mb-4">{role.location}</p>
+
+                <ul class="space-y-2">
+                  {role.bullets.map((bullet) => (
+                    <li class="text-text-muted text-sm leading-relaxed pl-4 relative before:content-['▸'] before:absolute before:left-0 before:text-text-faint before:text-xs">
+                      {bullet}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+
+    <!-- Education -->
+    <div class="mt-20">
+      <p class="section-header mb-8">
+        <span class="text-glow-amber">&gt;</span> education
+      </p>
+
+      <div class="grid sm:grid-cols-2 gap-6">
+        {
+          education.map((edu) => (
+            <div class="bg-screen-panel/30 border border-screen-raised/50 rounded-lg p-5">
+              <h4 class="text-text-bright font-medium mb-1">{edu.school}</h4>
+              <p class="font-mono text-sm text-text-muted">{edu.degree}</p>
+              <p class="font-mono text-xs text-text-faint mt-1">{edu.year}</p>
+            </div>
+          ))
+        }
+      </div>
+
+      <!-- Certifications -->
+      <div class="mt-6 flex flex-wrap gap-2">
+        {
+          certifications.map((cert) => (
+            <span class="pixel-tag rounded">{cert}</span>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

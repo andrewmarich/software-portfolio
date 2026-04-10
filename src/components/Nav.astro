@@ -1,0 +1,116 @@
+---
+const links = [
+  { href: "#about", label: "About" },
+  { href: "#projects", label: "Projects" },
+  { href: "#experience", label: "Experience" },
+  { href: "#skills", label: "Skills" },
+  { href: "#contact", label: "Contact" },
+];
+---
+
+<nav
+  class="fixed top-0 left-0 right-0 z-50 border-b border-screen-raised/50 backdrop-blur-md bg-screen-void/80"
+>
+  <div class="max-w-6xl mx-auto px-6 flex items-center justify-between h-14">
+    <!-- Logo / Name -->
+    <a
+      href="#"
+      class="font-mono text-sm text-glow-amber tracking-wide hover:glow-text--amber transition-all"
+    >
+      marich.dev
+    </a>
+
+    <!-- Nav links -->
+    <div class="hidden md:flex items-center gap-6">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="font-mono text-xs text-text-muted hover:text-glow-amber transition-colors tracking-wide uppercase"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+
+    <!-- Mobile menu button -->
+    <button
+      id="mobile-menu-toggle"
+      class="md:hidden text-text-muted hover:text-glow-amber transition-colors"
+      aria-label="Toggle menu"
+    >
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 20 20"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.5"
+      >
+        <line x1="3" y1="5" x2="17" y2="5"></line>
+        <line x1="3" y1="10" x2="17" y2="10"></line>
+        <line x1="3" y1="15" x2="17" y2="15"></line>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Scroll progress bar -->
+  <div class="h-0.5 bg-screen-dark">
+    <div
+      id="scroll-progress"
+      class="h-full bg-glow-amber transition-[width] duration-150 ease-out"
+      style="width: 0%"
+    >
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="hidden md:hidden border-t border-screen-raised/50 bg-screen-void/95 backdrop-blur-md"
+  >
+    <div class="px-6 py-4 flex flex-col gap-3">
+      {
+        links.map((link) => (
+          <a
+            href={link.href}
+            class="mobile-link font-mono text-sm text-text-muted hover:text-glow-amber transition-colors tracking-wide uppercase"
+          >
+            {link.label}
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Scroll progress
+  function updateProgress() {
+    const bar = document.getElementById("scroll-progress");
+    if (!bar) return;
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    bar.style.width = `${progress}%`;
+  }
+
+  window.addEventListener("scroll", updateProgress, { passive: true });
+  updateProgress();
+
+  // Mobile menu toggle
+  const toggle = document.getElementById("mobile-menu-toggle");
+  const menu = document.getElementById("mobile-menu");
+
+  toggle?.addEventListener("click", () => {
+    menu?.classList.toggle("hidden");
+  });
+
+  // Close mobile menu on link click
+  document.querySelectorAll(".mobile-link").forEach((link) => {
+    link.addEventListener("click", () => {
+      menu?.classList.add("hidden");
+    });
+  });
+</script>

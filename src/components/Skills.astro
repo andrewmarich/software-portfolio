@@ -1,0 +1,58 @@
+---
+interface SkillGroup {
+  label: string;
+  skills: string[];
+}
+
+const groups: SkillGroup[] = [
+  {
+    label: "Frontend",
+    skills: ["React", "TypeScript", "Tailwind CSS", "HTMX", "Astro", "TanStack"],
+  },
+  {
+    label: "Backend",
+    skills: ["Python", "Django", "Node.js", "PostgreSQL", "Drizzle ORM"],
+  },
+  {
+    label: "Infrastructure",
+    skills: ["AWS", "GCP", "Cloudflare", "Docker", "Terraform"],
+  },
+  {
+    label: "Tools",
+    skills: ["Git", "Bun", "CI/CD", "Linear", "Notion"],
+  },
+];
+---
+
+<section id="skills" class="relative py-24 lg:py-32">
+  <!-- Ambient glow -->
+  <div
+    class="glow-pool glow-pool--cyan"
+    style="width: 500px; height: 500px; top: 50%; left: -200px; transform: translateY(-50%);"
+  >
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <!-- Section header -->
+    <p class="section-header mb-12">
+      <span class="text-glow-amber">&gt;</span> ls skills/
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-8">
+      {
+        groups.map((group) => (
+          <div>
+            <h3 class="font-mono text-sm text-text-faint uppercase tracking-wider mb-4">
+              [{group.label}]
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span class="pixel-tag rounded">{skill}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

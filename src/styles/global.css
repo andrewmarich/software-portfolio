@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* Fonts — self-hosted via @fontsource */
+@import "@fontsource/outfit/400.css";
+@import "@fontsource/outfit/500.css";
+@import "@fontsource/outfit/600.css";
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+@import "@fontsource/press-start-2p/400.css";
+
+/* Atmosphere & retro layers */
+@import "./atmosphere.css";
+@import "./retro.css";
+
+/*
+ * Design tokens — domain-evocative naming
+ * Derived from the retro gaming world:
+ * CRT monitors, arcade cabinets, terminal sessions
+ */
+
+@theme {
+  /* Surfaces — powered-off CRT to raised panel */
+  --color-screen-void: #08080f;
+  --color-screen-dark: #0e0e18;
+  --color-screen-panel: #161625;
+  --color-screen-raised: #1e1e30;
+
+  /* Text hierarchy */
+  --color-text-bright: #e8e8f0;
+  --color-text-muted: #8888a0;
+  --color-text-faint: #4a4a60;
+
+  /* Accents — terminal phosphor, arcade neon, CRT glow */
+  --color-glow-amber: #ffb000;
+  --color-neon-cyan: #00e5ff;
+  --color-neon-magenta: #ff2d6f;
+  --color-phosphor: #39ff14;
+
+  /* Font families */
+  --font-body: "Outfit", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-pixel: "Press Start 2P", monospace;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-screen-void);
+  color: var(--color-text-bright);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: color-mix(in oklch, var(--color-glow-amber), transparent 70%);
+  color: var(--color-text-bright);
+}
+
+/* Scrollbar styling for dark theme */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-screen-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-screen-raised);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-faint);
+}

@@ -1,0 +1,93 @@
+---
+
+---
+
+<section
+  id="hero"
+  class="relative min-h-screen flex items-center overflow-hidden"
+>
+  <!-- Ambient glow pools -->
+  <div
+    class="glow-pool glow-pool--amber"
+    style="width: 500px; height: 500px; top: -100px; right: -100px;"
+  >
+  </div>
+  <div
+    class="glow-pool glow-pool--cyan"
+    style="width: 400px; height: 400px; bottom: -50px; left: -150px;"
+  >
+  </div>
+
+  <!-- Dot grid background -->
+  <div class="absolute inset-0 atmosphere-dots opacity-[0.03]"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto px-6 w-full">
+    <div class="max-w-2xl">
+      <!-- Terminal-style greeting -->
+      <p class="font-mono text-sm text-text-faint mb-4 tracking-wide">
+        <span class="text-glow-amber">~</span> hello, world
+      </p>
+
+      <!-- Name -->
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-semibold tracking-tight mb-4">
+        Andrew<br />
+        <span class="text-glow-amber">Marich</span>
+      </h1>
+
+      <!-- Title with blinking cursor -->
+      <p class="font-mono text-lg sm:text-xl text-text-muted mb-6">
+        <span class="text-glow-amber">&gt;</span> full-stack engineer<span
+          class="cursor-blink"></span>
+      </p>
+
+      <!-- Tagline -->
+      <p class="text-text-muted text-lg max-w-lg mb-10 leading-relaxed">
+        I build scalable systems that bridge business vision and technical
+        reality — from cloud infrastructure to pixel-perfect interfaces.
+      </p>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-wrap gap-4">
+        <a
+          href="#projects"
+          class="group inline-flex items-center gap-2 px-6 py-3 font-mono text-sm
+                 bg-screen-raised border border-screen-raised text-text-bright
+                 rounded glow-hover transition-all hover:text-glow-amber"
+        >
+          See my work
+          <svg
+            class="w-4 h-4 transition-transform group-hover:translate-y-0.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+          >
+            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+          </svg>
+        </a>
+        <a
+          href="#contact"
+          class="inline-flex items-center gap-2 px-6 py-3 font-mono text-sm
+                 border border-text-faint text-text-muted
+                 rounded hover:border-glow-amber hover:text-glow-amber transition-all"
+        >
+          Get in touch
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-text-faint animate-bounce">
+    <svg
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+    >
+      <path d="M12 5v14M5 12l7 7 7-7"></path>
+    </svg>
+  </div>
+</section>
