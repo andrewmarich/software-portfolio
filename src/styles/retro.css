@@ -153,3 +153,38 @@
   border-color: color-mix(in oklch, var(--color-glow-amber), transparent 60%);
   background: color-mix(in oklch, var(--color-glow-amber), transparent 92%);
 }
+
+/*
+ * Retro Mode — activated via Konami Code (↑↑↓↓←→←→BA)
+ * Cranks up the CRT effects, switches to phosphor green,
+ * and makes everything feel like a 1983 terminal.
+ */
+:root.retro-mode {
+  --color-text-bright: #39ff14;
+  --color-text-muted: #2ab80e;
+  --color-text-faint: #1a7a0a;
+  --color-glow-amber: #39ff14;
+  --color-neon-cyan: #39ff14;
+  --color-neon-magenta: #39ff14;
+}
+
+.retro-mode body {
+  font-family: var(--font-mono) !important;
+}
+
+.retro-mode .atmosphere-grain::before {
+  opacity: 0.08;
+}
+
+.retro-mode .atmosphere-scanlines::after {
+  opacity: 0.08;
+}
+
+.retro-mode * {
+  border-radius: 0 !important;
+}
+
+.retro-mode img,
+.retro-mode .crt-vignette {
+  filter: grayscale(1) brightness(0.8) contrast(1.2);
+}

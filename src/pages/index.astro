@@ -10,11 +10,19 @@ import Contact from "../components/Contact.astro";
 import Footer from "../components/Footer.astro";
 import SectionDivider from "../components/SectionDivider.astro";
 import BootSequence from "../islands/BootSequence";
+import Achievements from "../islands/Achievements";
+import KonamiCode from "../islands/KonamiCode";
+import Terminal from "../islands/Terminal";
 ---
 
 <Base>
   <!-- Boot sequence — client:load for immediate render -->
   <BootSequence client:load />
+
+  <!-- Easter eggs — lazy loaded, no impact on initial bundle -->
+  <Achievements client:idle />
+  <KonamiCode client:idle />
+  <Terminal client:idle />
 
   <Nav />
   <main class="pt-14">
