@@ -73,11 +73,12 @@ const COMMANDS: Record<string, () => string[]> = {
     "",
     "  ██ ██ ██ ██ ██ ██ ██ ██",
   ],
-  "sudo rm -rf /": () => ["Nice try. 😏"],
-  ls: () => ["about/  projects/  experience/  skills/  contact/"],
+  "sudo rm -rf /": () => ["You don't have the right, O you don't have the right."],
+  ls: () => ["about/  projects/  experience/  skills/  contact/  .secret/"],
   pwd: () => ["/home/visitor/marich.dev"],
   date: () => [new Date().toString()],
   echo: () => ["echo echo echo..."],
+  "cd .secret": () => ["Nice try, Tarnished."],
   "": () => [],
 };
 

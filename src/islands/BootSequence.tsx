@@ -1,30 +1,31 @@
 import { useState, useEffect, useCallback } from "react";
 
 const BOOT_LINES = [
-  { text: "MARICH SYSTEMS BIOS v1.0", delay: 0, style: "header" },
-  { text: "Copyright (C) 2020-2026 Andrew Marich", delay: 100, style: "dim" },
-  { text: "", delay: 200, style: "normal" },
-  { text: "Checking system components...", delay: 300, style: "normal" },
-  { text: "  CPU: Full-Stack Engineer (multi-core)", delay: 450, style: "normal" },
-  { text: "  RAM: 2x BS Degrees (Finance + CS)", delay: 600, style: "normal" },
-  { text: "", delay: 700, style: "normal" },
-  { text: "Loading modules:", delay: 800, style: "normal" },
-  { text: "  react@19 ................ OK", delay: 950, style: "success" },
-  { text: "  django@6 ................ OK", delay: 1100, style: "success" },
-  { text: "  cloudflare-workers ...... OK", delay: 1250, style: "success" },
-  { text: "  tailwind@4 .............. OK", delay: 1400, style: "success" },
-  { text: "  typescript .............. OK", delay: 1500, style: "success" },
-  { text: "", delay: 1600, style: "normal" },
-  { text: "Mounting projects:", delay: 1700, style: "normal" },
-  { text: "  /dev/balance ............ ACTIVE", delay: 1850, style: "cyan" },
-  { text: "  /dev/b1-marketing ....... ACTIVE", delay: 2000, style: "cyan" },
-  { text: "", delay: 2100, style: "normal" },
-  { text: "> andrew.marich --role='full-stack engineer'", delay: 2200, style: "command" },
-  { text: "", delay: 2400, style: "normal" },
-  { text: "SYSTEM READY_", delay: 2500, style: "ready" },
+  { text: "MARICH SYSTEMS BIOS v1.0", style: "header" },
+  { text: "Copyright (C) 2020-2026 Andrew Marich", style: "dim" },
+  { text: "", style: "normal" },
+  { text: "Checking system components...", style: "normal" },
+  { text: "  CPU: Full-Stack Engineer (multi-core)", style: "normal" },
+  { text: "  RAM: 2x BS Degrees (Finance + CS)", style: "normal" },
+  { text: "  GPU: Pixel-perfect UI rendering", style: "normal" },
+  { text: "", style: "normal" },
+  { text: "Loading modules:", style: "normal" },
+  { text: "  react@19 ................ OK", style: "success" },
+  { text: "  django@6 ................ OK", style: "success" },
+  { text: "  cloudflare-workers ...... OK", style: "success" },
+  { text: "  tailwind@4 .............. OK", style: "success" },
+  { text: "  typescript .............. OK", style: "success" },
+  { text: "", style: "normal" },
+  { text: "Mounting projects:", style: "normal" },
+  { text: "  /dev/balance ............ ACTIVE", style: "cyan" },
+  { text: "  /dev/b1-marketing ....... ACTIVE", style: "cyan" },
+  { text: "", style: "normal" },
+  { text: "> andrew.marich --role='full-stack engineer'", style: "command" },
+  { text: "", style: "normal" },
+  { text: "SYSTEM READY", style: "ready" },
 ] as const;
 
-const TOTAL_DURATION = 3000;
+const LINE_DELAY = 80;
 const STORAGE_KEY = "marich-boot-seen";
 
 type LineStyle = (typeof BOOT_LINES)[number]["style"];
@@ -50,7 +51,9 @@ function getLineClass(style: LineStyle): string {
 
 export default function BootSequence() {
   const [visibleLines, setVisibleLines] = useState<number>(0);
-  const [phase, setPhase] = useState<"boot" | "flash" | "done">("boot");
+  const [phase, setPhase] = useState<"typing" | "waiting" | "flash" | "done">(
+    "typing",
+  );
   const [skipBoot, setSkipBoot] = useState(false);
 
   const finishBoot = useCallback(() => {
@@ -74,21 +77,37 @@ export default function BootSequence() {
     } catch {}
 
     // Show lines progressively
-    const timers: ReturnType<typeof setTimeout>[] = [];
+    let current = 0;
+    const timer = setInterval(() => {
+      current++;
+      setVisibleLines(current);
+      if (current >= BOOT_LINES.length) {
+        clearInterval(timer);
+        setPhase("waiting");
+      }
+    }, LINE_DELAY);
 
-    BOOT_LINES.forEach((line, i) => {
-      timers.push(
-        setTimeout(() => {
-          setVisibleLines(i + 1);
-        }, line.delay),
-      );
-    });
+    return () => clearInterval(timer);
+  }, []);
 
-    // Finish boot
-    timers.push(setTimeout(finishBoot, TOTAL_DURATION));
+  // Listen for any key/click to continue once in "waiting" phase
+  useEffect(() => {
+    if (phase !== "waiting") return;
 
-    return () => timers.forEach(clearTimeout);
-  }, [finishBoot]);
+    function handleContinue() {
+      finishBoot();
+    }
+
+    window.addEventListener("keydown", handleContinue, { once: true });
+    window.addEventListener("click", handleContinue, { once: true });
+    window.addEventListener("touchstart", handleContinue, { once: true });
+
+    return () => {
+      window.removeEventListener("keydown", handleContinue);
+      window.removeEventListener("click", handleContinue);
+      window.removeEventListener("touchstart", handleContinue);
+    };
+  }, [phase, finishBoot]);
 
   if (skipBoot || phase === "done") return null;
 
@@ -97,12 +116,11 @@ export default function BootSequence() {
       className={`fixed inset-0 z-[200] flex items-center justify-center
                    bg-[var(--color-screen-void)] transition-opacity duration-300
                    ${phase === "flash" ? "opacity-0" : "opacity-100"}`}
-      onClick={finishBoot}
       role="presentation"
     >
       <div className="max-w-xl w-full px-6">
         <pre
-          className="font-[var(--font-mono)] text-xs sm:text-sm leading-relaxed select-none"
+          className="text-xs sm:text-sm leading-relaxed select-none"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
@@ -112,13 +130,15 @@ export default function BootSequence() {
           ))}
         </pre>
 
-        {/* Skip hint */}
-        <p
-          className="mt-8 text-center text-[var(--color-text-faint)] text-xs"
-          style={{ fontFamily: "var(--font-mono)" }}
-        >
-          click anywhere to skip
-        </p>
+        {/* Press any key prompt — only shows after all lines are visible */}
+        {phase === "waiting" && (
+          <p
+            className="mt-8 text-center text-[var(--color-glow-amber)] text-[8px] tracking-widest uppercase animate-pulse"
+            style={{ fontFamily: "var(--font-pixel)" }}
+          >
+            Press any key to continue
+          </p>
+        )}
       </div>
     </div>
   );

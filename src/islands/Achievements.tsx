@@ -9,28 +9,28 @@ interface Achievement {
 
 const ACHIEVEMENTS: Achievement[] = [
   {
+    id: "first-visit",
+    title: "Bonfire Lit",
+    description: "Arrived at marich.dev",
+    icon: "🔥",
+  },
+  {
     id: "scroll-bottom",
-    title: "Completionist",
-    description: "Scrolled to the bottom of the page",
-    icon: "🏆",
+    title: "You Died... of Scrolling",
+    description: "Reached the bottom of the page",
+    icon: "💀",
   },
   {
     id: "konami",
-    title: "Old School",
+    title: "Wumpa Fruit",
     description: "Entered the Konami Code",
-    icon: "🎮",
+    icon: "🍎",
   },
   {
     id: "terminal",
-    title: "Hacker",
-    description: "Opened the terminal",
+    title: "Sequence Break",
+    description: "Opened the hidden terminal",
     icon: "💻",
-  },
-  {
-    id: "first-visit",
-    title: "Welcome",
-    description: "Visited marich.dev for the first time",
-    icon: "👋",
   },
 ];
 

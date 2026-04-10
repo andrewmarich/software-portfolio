@@ -1,8 +1,8 @@
 ---
 interface Project {
   name: string;
+  subtitle: string;
   description: string;
-  role: string;
   metric?: string;
   tags: string[];
   color: "amber" | "cyan" | "magenta";
@@ -10,27 +10,27 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: "Balance",
+    name: "Lead Validation Engine",
+    subtitle: "B1 Marketing Group",
     description:
-      "HIPAA-compliant medical accounts receivable platform. Streamlines billing, payment collection, and patient communication for healthcare providers.",
-    role: "CTO & Co-founder",
+      "Enterprise lead intake and routing system for legal services. Captures leads through dynamic forms, validates and enriches data via third-party APIs, and routes qualified leads across a multi-vendor ecosystem — with HIPAA-grade compliance throughout.",
+    tags: ["Django", "HTMX", "PostgreSQL", "Django-Q2", "AWS", "Docker", "Terraform"],
+    color: "amber",
+  },
+  {
+    name: "Medical Billing Platform",
+    subtitle: "Balance",
+    description:
+      "HIPAA-compliant accounts receivable platform for medical and dental practices. Manages the full invoice lifecycle — creation, payment collection via Stripe, patient SMS follow-ups, and bulk operations — deployed to the edge on Cloudflare Workers.",
     metric: "30% → 70% 30-day collections",
     tags: ["React 19", "TanStack", "Cloudflare Workers", "Drizzle ORM", "PostgreSQL", "Stripe", "Twilio"],
     color: "cyan",
   },
   {
-    name: "B1 Marketing Platform",
+    name: "Professional Software Portfolio",
+    subtitle: "marich.dev",
     description:
-      "Enterprise lead intake and routing system for legal services. Captures, validates, enriches, and routes qualified leads across a multi-vendor ecosystem.",
-    role: "Full-Stack Engineer",
-    tags: ["Django", "HTMX", "PostgreSQL", "Django-Q2", "AWS", "Docker", "Terraform"],
-    color: "amber",
-  },
-  {
-    name: "marich.dev",
-    description:
-      "This portfolio — built to demonstrate engineering judgment. Static-first architecture with interactive islands, deployed to the edge.",
-    role: "Solo Developer",
+      "This site — a content-first portfolio with interactive React islands, retro-inspired design system, and a few hidden surprises. Built to demonstrate engineering judgment: the right tool for the right job.",
     tags: ["Astro", "React", "Tailwind CSS", "Cloudflare Pages", "TypeScript"],
     color: "magenta",
   },
@@ -72,16 +72,15 @@ const colorMap = {
       <span class="text-glow-amber">&gt;</span> ls projects/
     </p>
 
-    <!-- Project cards — staggered layout -->
-    <div class="space-y-8">
+    <!-- Project cards — aligned -->
+    <div class="space-y-6">
       {
-        projects.map((project, i) => {
+        projects.map((project) => {
           const colors = colorMap[project.color];
-          const offset = i % 2 === 1 ? "lg:ml-16" : "";
           return (
             <article
               class={`relative bg-screen-panel/50 border rounded-lg p-6 lg:p-8
-                       transition-all duration-300 ${colors.border} ${colors.glow} ${offset}`}
+                       transition-all duration-300 ${colors.border} ${colors.glow}`}
             >
               <div class="flex flex-col lg:flex-row gap-6">
                 <!-- Project image placeholder -->
@@ -102,15 +101,15 @@ const colorMap = {
 
                 <!-- Project info -->
                 <div class="flex-1 min-w-0">
-                  <div class="flex items-center gap-3 mb-2">
+                  <div class="flex items-center gap-3 mb-1">
                     <div class={`w-2 h-2 rounded-full ${colors.dot}`} />
                     <h3 class={`font-semibold text-xl ${colors.text}`}>
                       {project.name}
                     </h3>
                   </div>
 
-                  <p class="font-mono text-xs text-text-faint mb-3 uppercase tracking-wider">
-                    {project.role}
+                  <p class="font-mono text-xs text-text-faint mb-3 uppercase tracking-wider pl-5">
+                    {project.subtitle}
                   </p>
 
                   <p class="text-text-muted leading-relaxed mb-4">
