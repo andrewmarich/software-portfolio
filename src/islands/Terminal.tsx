@@ -82,12 +82,12 @@ const COMMANDS: Record<string, () => string[]> = {
   "cat .wallet/seed.txt": () => [
     "",
     "  RECOVERY PHRASE:",
-    "  pizza mass deploy yolo stonks hodl",
-    "  wagmi gm buidl degen lfg trust",
+    "  hodl moon rugpull silk road nft",
+    "  ape bored yacht degen gm wagmi",
     "",
-    "  Balance: 0.00000000 BTC",
-    "",
-    "  ...you didn't actually think this was real, right?",
+    "  BTC Balance: 0.00000000",
+    "  ETH Balance: 0.00000000",
+    "  NFTs: 1 (it's a screenshot of this terminal)",
     "",
   ],
   "cat .wallet/private.key": () => [
@@ -186,7 +186,7 @@ export default function Terminal() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[180] flex items-end justify-center p-4 sm:p-8">
+    <div className="fixed inset-0 z-[180] flex items-center justify-center p-4 sm:p-8">
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"

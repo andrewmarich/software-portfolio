@@ -2,12 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 
 const BOOT_LINES = [
   { text: "MARICH SYSTEMS BIOS v1.0", style: "header" },
-  { text: "Copyright (C) 2020-2026 Andrew Marich", style: "dim" },
-  { text: "", style: "normal" },
-  { text: "Checking system components...", style: "normal" },
-  { text: "  CPU: Full-Stack Engineer (multi-core)", style: "normal" },
-  { text: "  RAM: 2x BS Degrees (Finance + CS)", style: "normal" },
-  { text: "  GPU: Pixel-perfect UI rendering", style: "normal" },
+  { text: "Copyright (C) 2026 Andrew Marich", style: "dim" },
   { text: "", style: "normal" },
   { text: "Loading modules:", style: "normal" },
   { text: "  react@19 ................ OK", style: "success" },
@@ -76,36 +71,44 @@ export default function BootSequence() {
       }
     } catch {}
 
-    // Show lines progressively
+    // Show lines progressively, skip delay on empty lines
     let current = 0;
-    const timer = setInterval(() => {
+    function showNext() {
       current++;
       setVisibleLines(current);
       if (current >= BOOT_LINES.length) {
-        clearInterval(timer);
         setPhase("waiting");
+        return;
       }
-    }, LINE_DELAY);
+      const nextDelay = BOOT_LINES[current]?.text === "" ? 10 : LINE_DELAY;
+      setTimeout(showNext, nextDelay);
+    }
+    const initialTimer = setTimeout(showNext, LINE_DELAY);
 
-    return () => clearInterval(timer);
+    return () => clearTimeout(initialTimer);
   }, []);
 
-  // Listen for any key/click to continue once in "waiting" phase
+  // Listen for any key/click — skip to end during typing, dismiss during waiting
   useEffect(() => {
-    if (phase !== "waiting") return;
+    if (phase !== "typing" && phase !== "waiting") return;
 
-    function handleContinue() {
-      finishBoot();
+    function handleInteraction() {
+      if (phase === "typing") {
+        setVisibleLines(BOOT_LINES.length);
+        setPhase("waiting");
+      } else {
+        finishBoot();
+      }
     }
 
-    window.addEventListener("keydown", handleContinue, { once: true });
-    window.addEventListener("click", handleContinue, { once: true });
-    window.addEventListener("touchstart", handleContinue, { once: true });
+    window.addEventListener("keydown", handleInteraction, { once: true });
+    window.addEventListener("click", handleInteraction, { once: true });
+    window.addEventListener("touchstart", handleInteraction, { once: true });
 
     return () => {
-      window.removeEventListener("keydown", handleContinue);
-      window.removeEventListener("click", handleContinue);
-      window.removeEventListener("touchstart", handleContinue);
+      window.removeEventListener("keydown", handleInteraction);
+      window.removeEventListener("click", handleInteraction);
+      window.removeEventListener("touchstart", handleInteraction);
     };
   }, [phase, finishBoot]);
 
