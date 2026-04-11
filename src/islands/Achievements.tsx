@@ -73,7 +73,6 @@ function saveUnlocked(ids: Set<string>) {
 export default function Achievements() {
   const [toast, setToast] = useState<Achievement | null>(null);
   const [visible, setVisible] = useState(false);
-  const [showCollection, setShowCollection] = useState(false);
   const [unlockedIds, setUnlockedIds] = useState<Set<string>>(new Set());
   const toastQueue = useRef<Achievement[]>([]);
   const isShowingToast = useRef(false);
@@ -109,6 +108,9 @@ export default function Achievements() {
       unlocked.add(id);
       saveUnlocked(unlocked);
       setUnlockedIds(new Set(unlocked));
+
+      // Notify the nav counter
+      window.dispatchEvent(new Event("achievement-unlocked"));
 
       const achievement = ACHIEVEMENTS.find((a) => a.id === id);
       if (!achievement) return;
@@ -169,110 +171,41 @@ export default function Achievements() {
     };
   }, [unlock]);
 
-  const total = ACHIEVEMENTS.length;
-  const count = unlockedIds.size;
+  if (!toast) return null;
 
   return (
-    <>
-      {/* Achievement toast */}
-      {toast && (
-        <div
-          className={`fixed bottom-6 right-6 z-[150] max-w-xs transition-all duration-500
-                       ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
-        >
-          <div
-            className="flex items-center gap-3 px-4 py-3 rounded-lg border
-                        border-[var(--color-glow-amber)]/30
-                        bg-[var(--color-screen-panel)] shadow-lg
-                        shadow-[var(--color-glow-amber)]/5"
-          >
-            <span className="text-xl">{toast.icon}</span>
-            <div>
-              <p
-                className="text-[var(--color-glow-amber)] text-[8px] uppercase tracking-widest mb-0.5"
-                style={{ fontFamily: "var(--font-pixel)" }}
-              >
-                Achievement Unlocked
-              </p>
-              <p
-                className="text-[var(--color-text-bright)] text-sm font-medium"
-                style={{ fontFamily: "var(--font-body)" }}
-              >
-                {toast.title}
-              </p>
-              <p
-                className="text-[var(--color-text-faint)] text-xs"
-                style={{ fontFamily: "var(--font-mono)" }}
-              >
-                {toast.description}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* Collection counter — fixed bottom-left */}
-      <button
-        onClick={() => setShowCollection((prev) => !prev)}
-        className="fixed bottom-6 left-6 z-[140] flex items-center gap-2 px-3 py-1.5
-                   rounded border border-[var(--color-screen-raised)]/50
-                   bg-[var(--color-screen-panel)]/80 backdrop-blur-sm
-                   hover:border-[var(--color-glow-amber)]/30 transition-all
-                   cursor-pointer"
-        style={{ fontFamily: "var(--font-pixel)" }}
+    <div
+      className={`fixed bottom-6 right-6 z-[150] max-w-xs transition-all duration-500
+                   ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+    >
+      <div
+        className="flex items-center gap-3 px-4 py-3 rounded-lg border
+                    border-[var(--color-glow-amber)]/30
+                    bg-[var(--color-screen-panel)] shadow-lg
+                    shadow-[var(--color-glow-amber)]/5"
       >
-        <span className="text-sm">🏆</span>
-        <span className="text-[8px] text-[var(--color-text-muted)]">
-          {count}/{total}
-        </span>
-      </button>
-
-      {/* Collection panel */}
-      {showCollection && (
-        <div className="fixed bottom-16 left-6 z-[140] w-72 rounded-lg border
-                        border-[var(--color-screen-raised)]
-                        bg-[var(--color-screen-panel)] shadow-xl shadow-black/30
-                        overflow-hidden">
-          <div className="px-4 py-2 border-b border-[var(--color-screen-raised)]">
-            <p
-              className="text-[var(--color-glow-amber)] text-[8px] uppercase tracking-widest"
-              style={{ fontFamily: "var(--font-pixel)" }}
-            >
-              Achievements — {count}/{total}
-            </p>
-          </div>
-          <div className="p-3 space-y-2 max-h-64 overflow-y-auto">
-            {ACHIEVEMENTS.map((a) => {
-              const unlocked = unlockedIds.has(a.id);
-              return (
-                <div
-                  key={a.id}
-                  className={`flex items-center gap-3 px-3 py-2 rounded
-                              ${unlocked ? "bg-[var(--color-screen-raised)]/50" : "opacity-40"}`}
-                >
-                  <span className={`text-base ${unlocked ? "" : "grayscale"}`}>
-                    {unlocked ? a.icon : "❓"}
-                  </span>
-                  <div>
-                    <p
-                      className="text-[var(--color-text-bright)] text-xs font-medium"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
-                      {unlocked ? a.title : "???"}
-                    </p>
-                    <p
-                      className="text-[var(--color-text-faint)] text-[10px]"
-                      style={{ fontFamily: "var(--font-mono)" }}
-                    >
-                      {unlocked ? a.description : "Keep exploring..."}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+        <span className="text-xl">{toast.icon}</span>
+        <div>
+          <p
+            className="text-[var(--color-glow-amber)] text-[8px] uppercase tracking-widest mb-0.5"
+            style={{ fontFamily: "var(--font-pixel)" }}
+          >
+            Achievement Unlocked
+          </p>
+          <p
+            className="text-[var(--color-text-bright)] text-sm font-medium"
+            style={{ fontFamily: "var(--font-body)" }}
+          >
+            {toast.title}
+          </p>
+          <p
+            className="text-[var(--color-text-faint)] text-xs"
+            style={{ fontFamily: "var(--font-mono)" }}
+          >
+            {toast.description}
+          </p>
         </div>
-      )}
-    </>
+      </div>
+    </div>
   );
 }

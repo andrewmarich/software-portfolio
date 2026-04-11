@@ -54,7 +54,7 @@ const COMMANDS: Record<string, () => string[]> = {
     "└─────────────────────────────────────────────┘",
   ],
   contact: () => [
-    "Email:    marich.andrew@outlook.com",
+    "Email:    andrew@marich.dev",
     "GitHub:   github.com/andrewmarich",
     "LinkedIn: linkedin.com/in/andrewmarich",
   ],

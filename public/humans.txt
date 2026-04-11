@@ -3,7 +3,7 @@
 Developer: Andrew Marich
 Role: Full-Stack Engineer, CTO & Co-founder at Balance
 Location: Gilbert, AZ
-Contact: marich.andrew@outlook.com
+Contact: andrew@marich.dev
 GitHub: github.com/andrewmarich
 LinkedIn: linkedin.com/in/andrewmarich
 
