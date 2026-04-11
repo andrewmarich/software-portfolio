@@ -7,24 +7,32 @@ interface SkillGroup {
 const groups: SkillGroup[] = [
   {
     label: "Frontend",
-    skills: ["React", "TypeScript", "Tailwind CSS", "HTMX", "Astro", "TanStack"],
+    skills: ["TypeScript", "React", "TanStack", "Tailwind CSS", "HTMX", "Bootstrap", "Astro"],
   },
   {
     label: "Backend",
-    skills: ["Python", "Django", "Node.js", "PostgreSQL", "Drizzle ORM"],
+    skills: ["Python", "Django", "Node.js", "PostgreSQL", "Redis", "Drizzle ORM"],
   },
   {
     label: "Infrastructure",
     skills: ["AWS", "GCP", "Cloudflare", "Docker", "Terraform"],
   },
   {
+    label: "Integrations",
+    skills: ["Stripe", "Twilio", "HubSpot", "DocuSign"],
+  },
+  {
+    label: "AI Tooling",
+    skills: ["Claude Code", "ChatGPT / Codex", "Warp", "Local LLMs"],
+  },
+  {
     label: "Tools",
-    skills: ["Git", "Bun", "CI/CD", "Linear", "Notion"],
+    skills: ["Git", "GitHub", "GitLab", "CI/CD", "Bun", "Linear", "Notion", "Asana", "Trello"],
   },
 ];
 ---
 
-<section id="skills" class="relative py-24 lg:py-32">
+<section id="skills" class="relative py-16 lg:py-24">
   <!-- Ambient glow -->
   <div
     class="glow-pool glow-pool--cyan"
@@ -40,8 +48,8 @@ const groups: SkillGroup[] = [
 
     <div class="grid sm:grid-cols-2 gap-8">
       {
-        groups.map((group) => (
-          <div>
+        groups.map((group, i) => (
+          <div class="stagger-child" style={`--stagger: ${i}`}>
             <h3 class="font-mono text-sm text-text-faint uppercase tracking-wider mb-4">
               [{group.label}]
             </h3>

@@ -67,6 +67,19 @@ import Terminal from "../islands/Terminal";
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Staggered children within revealed sections */
+  .reveal-section .stagger-child {
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+  }
+
+  .reveal-section.visible .stagger-child {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--stagger, 0) * 120ms);
+  }
 </style>
 
 <script>

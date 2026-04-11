@@ -84,10 +84,14 @@
   border-color: color-mix(in oklch, var(--color-glow-amber), transparent 50%);
 }
 
-/* Glow hover — cyan variant */
-.glow-hover--cyan:hover {
-  box-shadow: 0 0 20px color-mix(in oklch, var(--color-neon-cyan), transparent 75%);
-  border-color: color-mix(in oklch, var(--color-neon-cyan), transparent 50%);
+/* Brand-colored glow hover — uses per-element --accent-rgb */
+[data-hover-glow] {
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+[data-hover-glow]:hover {
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.08);
+  border-color: rgba(var(--accent-rgb), 0.3);
 }
 
 /* Glow text — subtle text glow effect */

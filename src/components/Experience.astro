@@ -11,35 +11,35 @@ const roles: Role[] = [
   {
     company: "B1 Marketing Group",
     title: "Full-Stack Engineer | Cloud & Infrastructure",
-    period: "Jul 2025 — Present",
+    period: "Jul 2025 – Present",
     location: "Gilbert, AZ",
     bullets: [
-      "Architected company technology infrastructure from the ground up — deploying Microsoft 365, establishing IAM, and building a secure, scalable foundation.",
-      "Designs and develops full-stack internal tooling and custom integrations across CRM, communications, document signing, and lead validation systems.",
-      "Built the automation and API integration layer powering the lead generation pipeline, reducing manual overhead and improving data fidelity.",
-      "Owns frontend development and UI/UX design while serving as the team's primary code reviewer.",
+      "Own the frontend across all products. UI/UX design, component development, and making sure what ships looks and works the way it should.",
+      "Build and maintain API integrations across the platform. HubSpot, DocuSign, Twilio, and several third-party data vendors all connected through services I built.",
+      "Set up the company's cloud infrastructure, identity management, and dev tooling from scratch.",
+      "Act as the team's QA layer. Review every PR, catch issues before they ship, and keep the codebase clean.",
     ],
   },
   {
     company: "Balance",
     title: "CTO & Co-founder",
-    period: "Aug 2020 — Present",
+    period: "Aug 2020 – Present",
     location: "Greater Phoenix Area",
     bullets: [
-      "Co-founded and built a HIPAA-compliant medical accounts receivable platform from scratch — sole engineer on a 3-person founding team.",
-      "Architected the full stack on React 19, TanStack, Cloudflare Workers, and Google Cloud — increasing client 30-day collections from 30% to 70%.",
-      "Own all technology decisions: architecture, infrastructure, vendor selection, security compliance, and product roadmap.",
+      "Co-founded a medical billing platform with two partners. I'm the sole engineer, they handle the business and clinical side.",
+      "Built the full stack on React 19, TanStack, Cloudflare Workers, and Google Cloud. Client 30-day collections went from 30% to 70%.",
+      "Make all the technology calls. Stack, infrastructure, vendors, compliance, roadmap.",
     ],
   },
   {
     company: "Devize",
     title: "Product Builder",
-    period: "Oct 2024 — Jul 2025",
+    period: "Oct 2024 – Jul 2025",
     location: "Gilbert, AZ",
     bullets: [
-      "Led the end-to-end product lifecycle for 7+ client-facing web applications, from initial discovery to final deployment.",
-      "Engineered back-end solutions including relational data schemas, auth flows, and third-party API integrations (Stripe, Twilio, GCP).",
-      "Directed ongoing product maintenance via project backlogs in Notion and Linear, performing systematic bug triage.",
+      "Took 7+ web applications from idea to launch. Requirements, design, build, deploy, iterate.",
+      "Backend work across relational schemas, auth flows, and API integrations with Stripe, Twilio, and GCP.",
+      "Managed backlogs in Notion and Linear. Triaged bugs, prioritized features, kept things moving.",
     ],
   },
 ];
@@ -90,8 +90,8 @@ const certifications = ["Linux Essentials", "ITIL Foundation"];
 
       <div class="space-y-12">
         {
-          roles.map((role) => (
-            <div class="relative lg:pl-10">
+          roles.map((role, i) => (
+            <div class="stagger-child relative lg:pl-10" style={`--stagger: ${i}`}>
               {/* Timeline node — amber LED */}
               <div class="hidden lg:block absolute left-0 top-1.5 w-[15px] h-[15px]">
                 <div class="w-full h-full rounded-full bg-screen-dark border-2 border-glow-amber/50" />
@@ -136,8 +136,8 @@ const certifications = ["Linux Essentials", "ITIL Foundation"];
 
       <div class="grid sm:grid-cols-2 gap-6">
         {
-          education.map((edu) => (
-            <div class="bg-screen-panel/30 border border-screen-raised/50 rounded-lg p-5">
+          education.map((edu, i) => (
+            <div class="stagger-child bg-screen-panel/30 border border-screen-raised/50 rounded-lg p-5" style={`--stagger: ${i + 3}`}>
               <h4 class="text-text-bright font-medium mb-1">{edu.school}</h4>
               <p class="font-mono text-sm text-text-muted">{edu.degree}</p>
               <p class="font-mono text-xs text-text-faint mt-1">{edu.year}</p>
