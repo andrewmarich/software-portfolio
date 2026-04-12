@@ -66,6 +66,7 @@ html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: var(--color-screen-raised) var(--color-screen-void);
+  overflow-x: clip;
 }
 
 body {
@@ -74,6 +75,7 @@ body {
   color: var(--color-text-bright);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 ::selection {
