@@ -116,7 +116,7 @@ export default function BootSequence() {
 
   return (
     <div
-      className={`fixed inset-0 z-[200] flex items-center justify-center
+      className={`fixed inset-0 z-[var(--z-boot)] flex items-center justify-center
                    bg-[var(--color-screen-void)] transition-opacity duration-300
                    ${phase === "flash" ? "opacity-0" : "opacity-100"}`}
       role="presentation"
@@ -133,13 +133,13 @@ export default function BootSequence() {
           ))}
         </pre>
 
-        {/* Press any key prompt — only shows after all lines are visible */}
+        {/* Dismiss prompt — only shows after all lines are visible */}
         {phase === "waiting" && (
           <p
             className="mt-8 text-center text-[var(--color-glow-amber)] text-[8px] tracking-widest uppercase animate-pulse"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
-            Press any key to continue
+            Tap or press any key to continue
           </p>
         )}
       </div>

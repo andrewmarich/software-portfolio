@@ -1,5 +1,6 @@
 ---
-
+import { Image } from "astro:assets";
+import profileImg from "../assets/images/profile.webp";
 ---
 
 <section id="about" class="relative py-24 lg:py-32">
@@ -13,9 +14,11 @@
       <!-- Photo column -->
       <div class="lg:col-span-2 flex justify-center lg:justify-start">
         <div class="crt-vignette rounded-lg overflow-hidden w-64 h-64 lg:w-full lg:h-auto lg:aspect-square bg-screen-panel border border-screen-raised/50">
-          <img
-            src="/images/profile.jpeg"
+          <Image
+            src={profileImg}
             alt="Andrew Marich"
+            width={800}
+            height={800}
             class="w-full h-full object-cover"
             loading="lazy"
           />

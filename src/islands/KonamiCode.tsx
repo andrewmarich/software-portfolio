@@ -43,7 +43,7 @@ export default function KonamiCode() {
 
   return (
     <div
-      className="fixed top-16 left-1/2 -translate-x-1/2 z-[150] px-4 py-2 rounded
+      className="fixed top-16 left-1/2 -translate-x-1/2 z-[var(--z-overlay)] px-4 py-2 rounded
                   border border-[var(--color-phosphor)]/40
                   bg-[var(--color-screen-panel)]"
     >

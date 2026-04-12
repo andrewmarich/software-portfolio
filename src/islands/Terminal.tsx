@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, type KeyboardEvent as ReactKeyboardEvent } from "react";
 
 interface TerminalLine {
   type: "input" | "output" | "error" | "success";
@@ -63,7 +63,7 @@ const COMMANDS: Record<string, () => string[]> = {
     "        ╔══════╗       visitor@marich.dev",
     "        ║  AM  ║       ─────────────────",
     "        ╚══════╝       OS: marich.dev v1.0",
-    "                       Framework: Astro 5",
+    "                       Framework: Astro 6",
     "                       UI: React 19 islands",
     "                       Style: Tailwind CSS 4",
     "                       Runtime: Bun",
@@ -112,6 +112,7 @@ export default function Terminal() {
   const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
 
   const executeCommand = useCallback((cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
@@ -171,9 +172,9 @@ export default function Terminal() {
 
   // Focus input when opened
   useEffect(() => {
-    if (open) {
-      setTimeout(() => inputRef.current?.focus(), 100);
-    }
+    if (!open) return;
+    const id = setTimeout(() => inputRef.current?.focus(), 100);
+    return () => clearTimeout(id);
   }, [open]);
 
   // Auto-scroll to bottom
@@ -183,10 +184,29 @@ export default function Terminal() {
     }
   }, [lines]);
 
+  const handleTrapFocus = useCallback((e: ReactKeyboardEvent) => {
+    if (e.key !== "Tab") return;
+    const focusable = [closeRef.current, inputRef.current].filter(Boolean) as HTMLElement[];
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      }
+    } else {
+      if (document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    }
+  }, []);
+
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[180] flex items-center justify-center p-4 sm:p-8">
+    <div className="fixed inset-0 z-[var(--z-terminal)] flex items-center justify-center p-4 sm:p-8" onKeyDown={handleTrapFocus}>
       {/* Backdrop */}
       <div
         className="absolute inset-0 bg-black/60 backdrop-blur-sm"
@@ -212,6 +232,7 @@ export default function Terminal() {
             visitor@marich.dev
           </span>
           <button
+            ref={closeRef}
             onClick={() => setOpen(false)}
             className="text-[var(--color-text-faint)] hover:text-[var(--color-text-bright)] text-xs"
           >

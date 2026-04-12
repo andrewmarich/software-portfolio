@@ -45,19 +45,23 @@ const {
     <!-- SEO -->
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.url.href} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:url" content="https://marich.dev" />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={new URL("/images/portfolio-screenshot.png", Astro.site)} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/images/portfolio-screenshot.png", Astro.site)} />
 
     <meta name="theme-color" content="#08080f" />
+    <link rel="apple-touch-icon" href="/images/am-logo.png" />
 
     <!-- For the curious -->
     <link rel="author" href="/humans.txt" />
@@ -86,7 +90,7 @@ const {
         "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;"
       );
       console.log(
-        "%cBuilt with Astro 5, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
+        "%cBuilt with Astro 6, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
         "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;"
       );
       console.log(

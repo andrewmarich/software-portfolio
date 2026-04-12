@@ -1,32 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-
-interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-}
-
-const ACHIEVEMENTS: Achievement[] = [
-  { id: "first-visit", title: "A New Save File", description: "Arrived at marich.dev", icon: "💾" },
-  { id: "scroll-bottom", title: "Completionist", description: "Reached the bottom of the page", icon: "🏆" },
-  { id: "konami", title: "Cheat Code", description: "↑↑↓↓←→←→BA", icon: "🎮" },
-  { id: "terminal", title: "Sequence Break", description: "Opened the hidden terminal", icon: "💻" },
-  { id: "contact-click", title: "Side Quest", description: "Clicked a contact link", icon: "📜" },
-  { id: "idle-60", title: "Idle Animation", description: "Stayed for over 60 seconds", icon: "🕐" },
-  { id: "return-visit", title: "New Game+", description: "Returned to the site", icon: "🔄" },
-];
-
-const STORAGE_KEY = "marich-achievements";
-
-function getUnlocked(): Set<string> {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? new Set(JSON.parse(raw)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
+import { ACHIEVEMENTS, getUnlocked } from "./achievement-data";
 
 export default function AchievementNav() {
   const [unlocked, setUnlocked] = useState<Set<string>>(new Set());
@@ -41,11 +14,9 @@ export default function AchievementNav() {
     }
 
     window.addEventListener("achievement-unlocked", sync);
-    const interval = setInterval(sync, 2000);
 
     return () => {
       window.removeEventListener("achievement-unlocked", sync);
-      clearInterval(interval);
     };
   }, []);
 

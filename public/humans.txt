@@ -15,7 +15,7 @@ My daughter & two Labs: for keeping me grounded
 
 /* SITE */
 
-Framework: Astro 5
+Framework: Astro 6
 Islands: React 19
 Styling: Tailwind CSS 4
 Fonts: Outfit, Space Mono, Press Start 2P

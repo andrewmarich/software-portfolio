@@ -1,4 +1,7 @@
 /*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
   X-Powered-By: caffeine-and-ambition
   X-Built-With: astro-react-tailwind
   X-Easter-Egg: try the konami code

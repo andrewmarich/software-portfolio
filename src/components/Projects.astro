@@ -1,10 +1,15 @@
 ---
+import { Image } from "astro:assets";
+import leadsDashboard from "../assets/images/leads-dashboard.webp";
+import balanceDashboard from "../assets/images/balance-dashboard.webp";
+import portfolioScreenshot from "../assets/images/portfolio-screenshot.webp";
+
 interface Project {
   name: string;
   subtitle: string;
   description: string;
   tags: string[];
-  image?: string;
+  image: ImageMetadata;
   accent: string;
   accentRgb: string;
 }
@@ -16,7 +21,7 @@ const projects: Project[] = [
     description:
       "Lead intake and routing system for legal services. Call center agents fill out dynamic forms, the system validates and enriches data through third-party APIs, then routes qualified leads to the right vendors. Built with HIPAA compliance baked in.",
     tags: ["Django", "PostgreSQL", "HTMX", "Bootstrap", "AWS", "Docker", "Redis", "DocuSign"],
-    image: "/images/leads-dashboard.png",
+    image: leadsDashboard,
     accent: "oklch(64% .204 222)",
     accentRgb: "14,165,233",
   },
@@ -26,7 +31,7 @@ const projects: Project[] = [
     description:
       "Accounts receivable platform for medical and dental practices. Handles invoicing, payment collection through Stripe, patient follow-ups via SMS, and bulk operations. Runs on the edge through Cloudflare Workers.",
     tags: ["React", "TanStack", "PostgreSQL", "Cloudflare Workers", "GCP", "Stripe", "Twilio"],
-    image: "/images/balance-dashboard.png",
+    image: balanceDashboard,
     accent: "#8b5cf6",
     accentRgb: "139,92,246",
   },
@@ -36,7 +41,7 @@ const projects: Project[] = [
     description:
       "The site you're on right now. Mostly static with React islands where interactivity matters. Has a few things hidden around if you like poking at websites.",
     tags: ["Astro", "React", "TypeScript", "Tailwind CSS 4", "Cloudflare Pages"],
-    image: "/images/portfolio-screenshot.png",
+    image: portfolioScreenshot,
     accent: "#ff2d6f",
     accentRgb: "255,45,111",
   },
@@ -71,9 +76,11 @@ const projects: Project[] = [
               <!-- Project image -->
               <div class="crt-hover rounded-md overflow-hidden bg-screen-dark border border-screen-raised/50
                           w-full lg:w-80 shrink-0 relative">
-                <img
+                <Image
                   src={project.image}
                   alt={`${project.name} screenshot`}
+                  width={1200}
+                  height={657}
                   class="w-full h-auto block"
                   loading="lazy"
                 />

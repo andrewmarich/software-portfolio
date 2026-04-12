@@ -1,74 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
+import { type Achievement, ACHIEVEMENTS, getUnlocked, saveUnlocked } from "./achievement-data";
 
-interface Achievement {
-  id: string;
-  title: string;
-  description: string;
-  icon: string;
-}
-
-const ACHIEVEMENTS: Achievement[] = [
-  {
-    id: "first-visit",
-    title: "A New Save File",
-    description: "Arrived at marich.dev",
-    icon: "💾",
-  },
-  {
-    id: "scroll-bottom",
-    title: "Completionist",
-    description: "Reached the bottom of the page",
-    icon: "🏆",
-  },
-  {
-    id: "konami",
-    title: "Cheat Code",
-    description: "↑↑↓↓←→←→BA",
-    icon: "🎮",
-  },
-  {
-    id: "terminal",
-    title: "Sequence Break",
-    description: "Opened the hidden terminal",
-    icon: "💻",
-  },
-  {
-    id: "contact-click",
-    title: "Side Quest",
-    description: "Clicked a contact link",
-    icon: "📜",
-  },
-  {
-    id: "idle-60",
-    title: "Idle Animation",
-    description: "Stayed for over 60 seconds",
-    icon: "🕐",
-  },
-  {
-    id: "return-visit",
-    title: "New Game+",
-    description: "Returned to the site",
-    icon: "🔄",
-  },
-];
-
-const STORAGE_KEY = "marich-achievements";
 const VISIT_KEY = "marich-visited-before";
-
-function getUnlocked(): Set<string> {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? new Set(JSON.parse(raw)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-
-function saveUnlocked(ids: Set<string>) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...ids]));
-  } catch {}
-}
 
 export default function Achievements() {
   const [toast, setToast] = useState<Achievement | null>(null);
@@ -76,10 +9,13 @@ export default function Achievements() {
   const [unlockedIds, setUnlockedIds] = useState<Set<string>>(new Set());
   const toastQueue = useRef<Achievement[]>([]);
   const isShowingToast = useRef(false);
+  const unlockedRef = useRef<Set<string>>(new Set());
 
   // Sync state on mount
   useEffect(() => {
-    setUnlockedIds(getUnlocked());
+    const initial = getUnlocked();
+    unlockedRef.current = initial;
+    setUnlockedIds(initial);
   }, []);
 
   const showNextToast = useCallback(() => {
@@ -102,10 +38,13 @@ export default function Achievements() {
 
   const unlock = useCallback(
     (id: string) => {
+      if (unlockedRef.current.has(id)) return;
+
       const unlocked = getUnlocked();
-      if (unlocked.has(id)) return;
+      if (unlocked.has(id)) { unlockedRef.current = unlocked; return; }
 
       unlocked.add(id);
+      unlockedRef.current = unlocked;
       saveUnlocked(unlocked);
       setUnlockedIds(new Set(unlocked));
 
@@ -175,7 +114,9 @@ export default function Achievements() {
 
   return (
     <div
-      className={`fixed bottom-6 right-6 z-[150] max-w-xs transition-all duration-500
+      role="status"
+      aria-live="polite"
+      className={`fixed bottom-6 right-6 z-[var(--z-overlay)] max-w-xs transition-all duration-500
                    ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
     >
       <div

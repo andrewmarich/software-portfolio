@@ -15,6 +15,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "^13.1.8",
     "@astrojs/react": "^5.0.3",
+    "@astrojs/sitemap": "^3.7.2",
     "@fontsource/outfit": "^5.2.8",
     "@fontsource/press-start-2p": "^5.2.7",
     "@fontsource/space-mono": "^5.2.9",
