@@ -140,6 +140,31 @@
   text-transform: uppercase;
 }
 
+/* Section padding — standard for content-heavy sections */
+.section-padding {
+  padding-block: 4rem;
+}
+@media (min-width: 640px) {
+  .section-padding {
+    padding-block: 6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-block: 8rem;
+  }
+}
+
+/* Section padding — tighter variant for shorter sections */
+.section-padding-tight {
+  padding-block: 4rem;
+}
+@media (min-width: 1024px) {
+  .section-padding-tight {
+    padding-block: 6rem;
+  }
+}
+
 /* Pixel tag — tiny Press Start 2P labels */
 .pixel-tag {
   font-family: var(--font-pixel);

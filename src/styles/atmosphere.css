@@ -55,14 +55,11 @@
   filter: blur(80px);
   pointer-events: none;
   z-index: 0;
-  transform: scale(0.55);
-  transform-origin: center;
 }
 
 @media (min-width: 768px) {
   .glow-pool {
     filter: blur(120px);
-    transform: none;
   }
 }
 
@@ -79,4 +76,48 @@
 .glow-pool--magenta {
   background: var(--color-neon-magenta);
   opacity: 0.03;
+}
+
+/* Position modifiers — scale down on mobile via transform */
+.glow-pool--top-right {
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  transform: scale(0.55);
+}
+
+.glow-pool--bottom-left {
+  bottom: -50px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  transform: scale(0.55);
+}
+
+.glow-pool--right-center {
+  top: 50%;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  transform: translateY(-50%) scale(0.55);
+}
+
+.glow-pool--left-center {
+  top: 50%;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  transform: translateY(-50%) scale(0.55);
+}
+
+@media (min-width: 768px) {
+  .glow-pool--top-right,
+  .glow-pool--bottom-left {
+    transform: none;
+  }
+  .glow-pool--right-center,
+  .glow-pool--left-center {
+    transform: translateY(-50%);
+  }
 }

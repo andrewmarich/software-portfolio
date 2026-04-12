@@ -1,5 +1,6 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { ACHIEVEMENTS, getUnlocked } from "./achievement-data";
+import { useClickOutside } from "./hooks";
 
 export default function AchievementNav() {
   const [unlocked, setUnlocked] = useState<Set<string>>(new Set());
@@ -14,22 +15,11 @@ export default function AchievementNav() {
     }
 
     window.addEventListener("achievement-unlocked", sync);
-
-    return () => {
-      window.removeEventListener("achievement-unlocked", sync);
-    };
+    return () => window.removeEventListener("achievement-unlocked", sync);
   }, []);
 
-  useEffect(() => {
-    if (!open) return;
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    }
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, [open]);
+  const close = useCallback(() => setOpen(false), []);
+  useClickOutside(ref, close, open);
 
   const count = unlocked.size;
 
@@ -41,10 +31,7 @@ export default function AchievementNav() {
         aria-label={`Achievements: ${count} of ${ACHIEVEMENTS.length}`}
       >
         <span className="text-xs">🏆</span>
-        <span
-          className="text-[8px]"
-          style={{ fontFamily: "var(--font-pixel)" }}
-        >
+        <span className="text-[8px] font-pixel">
           {count}/{ACHIEVEMENTS.length}
         </span>
       </button>
@@ -57,10 +44,7 @@ export default function AchievementNav() {
                       overflow-hidden z-50"
         >
           <div className="px-3 py-2 border-b border-[var(--color-screen-raised)]">
-            <p
-              className="text-[var(--color-glow-amber)] text-[7px] uppercase tracking-widest"
-              style={{ fontFamily: "var(--font-pixel)" }}
-            >
+            <p className="text-[var(--color-glow-amber)] text-[7px] uppercase tracking-widest font-pixel">
               Achievements — {count}/{ACHIEVEMENTS.length}
             </p>
           </div>
@@ -77,16 +61,10 @@ export default function AchievementNav() {
                     {isUnlocked ? a.icon : "❓"}
                   </span>
                   <div className="min-w-0">
-                    <p
-                      className="text-[var(--color-text-bright)] text-[11px] font-medium truncate"
-                      style={{ fontFamily: "var(--font-body)" }}
-                    >
+                    <p className="text-[var(--color-text-bright)] text-[11px] font-medium truncate">
                       {isUnlocked ? a.title : "???"}
                     </p>
-                    <p
-                      className="text-[var(--color-text-faint)] text-[9px] truncate"
-                      style={{ fontFamily: "var(--font-mono)" }}
-                    >
+                    <p className="text-[var(--color-text-faint)] text-[9px] truncate font-mono">
                       {isUnlocked ? a.description : "Keep exploring..."}
                     </p>
                   </div>

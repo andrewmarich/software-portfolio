@@ -6,16 +6,12 @@ const VISIT_KEY = "marich-visited-before";
 export default function Achievements() {
   const [toast, setToast] = useState<Achievement | null>(null);
   const [visible, setVisible] = useState(false);
-  const [unlockedIds, setUnlockedIds] = useState<Set<string>>(new Set());
   const toastQueue = useRef<Achievement[]>([]);
   const isShowingToast = useRef(false);
   const unlockedRef = useRef<Set<string>>(new Set());
 
-  // Sync state on mount
   useEffect(() => {
-    const initial = getUnlocked();
-    unlockedRef.current = initial;
-    setUnlockedIds(initial);
+    unlockedRef.current = getUnlocked();
   }, []);
 
   const showNextToast = useCallback(() => {
@@ -40,15 +36,8 @@ export default function Achievements() {
     (id: string) => {
       if (unlockedRef.current.has(id)) return;
 
-      const unlocked = getUnlocked();
-      if (unlocked.has(id)) { unlockedRef.current = unlocked; return; }
-
-      unlocked.add(id);
-      unlockedRef.current = unlocked;
-      saveUnlocked(unlocked);
-      setUnlockedIds(new Set(unlocked));
-
-      // Notify the nav counter
+      unlockedRef.current.add(id);
+      saveUnlocked(unlockedRef.current);
       window.dispatchEvent(new Event("achievement-unlocked"));
 
       const achievement = ACHIEVEMENTS.find((a) => a.id === id);
@@ -63,7 +52,6 @@ export default function Achievements() {
   );
 
   useEffect(() => {
-    // Return visit check
     try {
       if (localStorage.getItem(VISIT_KEY)) {
         setTimeout(() => unlock("return-visit"), 1500);
@@ -71,10 +59,8 @@ export default function Achievements() {
       localStorage.setItem(VISIT_KEY, "1");
     } catch {}
 
-    // First visit achievement
     setTimeout(() => unlock("first-visit"), 2500);
 
-    // Scroll to bottom
     function checkScroll() {
       const scrollTop = window.scrollY;
       const docHeight =
@@ -85,7 +71,6 @@ export default function Achievements() {
     }
     window.addEventListener("scroll", checkScroll, { passive: true });
 
-    // Contact link clicks
     function checkContact(e: MouseEvent) {
       const target = e.target as HTMLElement;
       const link = target.closest('a[href^="mailto"], a[href*="github"], a[href*="linkedin"]');
@@ -93,10 +78,8 @@ export default function Achievements() {
     }
     document.addEventListener("click", checkContact);
 
-    // Idle for 60 seconds
     const idleTimer = setTimeout(() => unlock("idle-60"), 60000);
 
-    // Custom achievement events from other islands
     function handleAchievement(e: Event) {
       unlock((e as CustomEvent<string>).detail);
     }
@@ -127,22 +110,13 @@ export default function Achievements() {
       >
         <span className="text-xl">{toast.icon}</span>
         <div>
-          <p
-            className="text-[var(--color-glow-amber)] text-[8px] uppercase tracking-widest mb-0.5"
-            style={{ fontFamily: "var(--font-pixel)" }}
-          >
+          <p className="text-[var(--color-glow-amber)] text-[8px] uppercase tracking-widest mb-0.5 font-pixel">
             Achievement Unlocked
           </p>
-          <p
-            className="text-[var(--color-text-bright)] text-sm font-medium"
-            style={{ fontFamily: "var(--font-body)" }}
-          >
+          <p className="text-[var(--color-text-bright)] text-sm font-medium">
             {toast.title}
           </p>
-          <p
-            className="text-[var(--color-text-faint)] text-xs"
-            style={{ fontFamily: "var(--font-mono)" }}
-          >
+          <p className="text-[var(--color-text-faint)] text-xs font-mono">
             {toast.description}
           </p>
         </div>
