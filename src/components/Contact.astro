@@ -37,15 +37,15 @@ const links = [
     <div class="space-y-4">
       {
         links.map((link) => (
-          <div class="flex items-baseline gap-4">
-            <span class="font-mono text-xs text-text-faint uppercase tracking-wider w-20 shrink-0">
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+            <span class="font-mono text-xs text-text-faint uppercase tracking-wider sm:w-20 sm:shrink-0 mb-1 sm:mb-0">
               {link.label}
             </span>
             <a
               href={link.href}
               target={link.href.startsWith("mailto") ? undefined : "_blank"}
               rel={link.href.startsWith("mailto") ? undefined : "noopener noreferrer"}
-              class="font-mono text-sm text-text-muted glow-underline"
+              class="font-mono text-sm text-text-muted glow-underline break-all sm:break-normal"
             >
               {link.display}
             </a>

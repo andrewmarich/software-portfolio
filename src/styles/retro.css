@@ -143,13 +143,20 @@
 /* Pixel tag — tiny Press Start 2P labels */
 .pixel-tag {
   font-family: var(--font-pixel);
-  font-size: 0.5rem;
+  font-size: 0.625rem;
   letter-spacing: 0.05em;
-  padding: 0.3rem 0.6rem;
+  padding: 0.35rem 0.65rem;
   border: 1px solid color-mix(in oklch, var(--color-screen-raised), transparent 20%);
   background: color-mix(in oklch, var(--color-screen-panel), transparent 60%);
   color: var(--color-text-muted);
   transition: all 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .pixel-tag {
+    font-size: 0.5rem;
+    padding: 0.3rem 0.6rem;
+  }
 }
 
 .pixel-tag:hover {

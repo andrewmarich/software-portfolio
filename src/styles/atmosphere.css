@@ -52,9 +52,18 @@
 .glow-pool {
   position: absolute;
   border-radius: 50%;
-  filter: blur(120px);
+  filter: blur(80px);
   pointer-events: none;
   z-index: 0;
+  transform: scale(0.55);
+  transform-origin: center;
+}
+
+@media (min-width: 768px) {
+  .glow-pool {
+    filter: blur(120px);
+    transform: none;
+  }
 }
 
 .glow-pool--amber {

@@ -51,7 +51,7 @@ export default function AchievementNav() {
 
       {open && (
         <div
-          className="absolute top-8 right-0 w-64 rounded-lg border
+          className="absolute top-8 right-0 w-[min(16rem,calc(100vw-2rem))] rounded-lg border
                       border-[var(--color-screen-raised)]
                       bg-[var(--color-screen-panel)] shadow-xl shadow-black/30
                       overflow-hidden z-50"
