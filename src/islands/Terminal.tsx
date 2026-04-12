@@ -26,7 +26,7 @@ const COMMANDS: Record<string, () => string[]> = {
     "Full-Stack Engineer | Gilbert, AZ",
     "",
     "Finance grad turned software engineer.",
-    "CTO & Co-founder at Balance.",
+    "CTO & Co-Founder at Balance.",
     "Building scalable systems by day,",
     "playing retro games by night.",
     "",
@@ -40,7 +40,7 @@ const COMMANDS: Record<string, () => string[]> = {
   ],
   projects: () => [
     "┌─────────────────────────────────────────────┐",
-    "│ Balance          CTO & Co-founder           │",
+    "│ Balance          CTO & Co-Founder           │",
     "│ Medical A/R platform | React + Cloudflare   │",
     "│ 30% → 70% collections improvement           │",
     "├─────────────────────────────────────────────┤",
