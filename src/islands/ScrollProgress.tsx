@@ -71,7 +71,7 @@ export default function ScrollProgress() {
       <span
         className={`text-[8px] transition-colors duration-300 ${
           levelUp
-            ? "text-[var(--color-glow-amber)]"
+            ? "text-[var(--color-glow-primary)]"
             : "text-[var(--color-text-faint)]"
         }`}
       >
@@ -84,7 +84,7 @@ export default function ScrollProgress() {
             key={i}
             className={`inline-block w-1.5 h-2.5 transition-colors duration-150 ${
               i < filled
-                ? "bg-[var(--color-glow-amber)]"
+                ? "bg-[var(--color-glow-primary)]"
                 : "bg-[var(--color-screen-raised)]"
             }`}
           />
@@ -94,7 +94,7 @@ export default function ScrollProgress() {
       <span className="text-[var(--color-text-faint)] text-[7px]">XP</span>
 
       {levelUp && (
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[var(--color-glow-amber)] text-[8px] animate-bounce font-pixel">
+        <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[var(--color-glow-primary)] text-[8px] animate-bounce font-pixel">
           LVL UP!
         </div>
       )}

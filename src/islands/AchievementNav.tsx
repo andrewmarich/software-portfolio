@@ -27,7 +27,7 @@ export default function AchievementNav() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-1.5 text-[var(--color-text-faint)] hover:text-[var(--color-glow-amber)] transition-colors cursor-pointer"
+        className="flex items-center gap-1.5 text-[var(--color-text-faint)] hover:text-[var(--color-glow-primary)] transition-colors cursor-pointer"
         aria-label={`Achievements: ${count} of ${ACHIEVEMENTS.length}`}
       >
         <span className="text-xs">🏆</span>
@@ -44,7 +44,7 @@ export default function AchievementNav() {
                       overflow-hidden z-50"
         >
           <div className="px-3 py-2 border-b border-[var(--color-screen-raised)]">
-            <p className="text-[var(--color-glow-amber)] text-[7px] uppercase tracking-widest font-pixel">
+            <p className="text-[var(--color-glow-primary)] text-[7px] uppercase tracking-widest font-pixel">
               Achievements — {count}/{ACHIEVEMENTS.length}
             </p>
           </div>

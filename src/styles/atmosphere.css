@@ -63,8 +63,8 @@
   }
 }
 
-.glow-pool--amber {
-  background: var(--color-glow-amber);
+.glow-pool--primary {
+  background: var(--color-glow-primary);
   opacity: 0.06;
 }
 

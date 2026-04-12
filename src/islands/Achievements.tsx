@@ -104,13 +104,13 @@ export default function Achievements() {
     >
       <div
         className="flex items-center gap-3 px-4 py-3 rounded-lg border
-                    border-[var(--color-glow-amber)]/30
+                    border-[var(--color-glow-primary)]/30
                     bg-[var(--color-screen-panel)] shadow-lg
-                    shadow-[var(--color-glow-amber)]/5"
+                    shadow-[var(--color-glow-primary)]/5"
       >
         <span className="text-xl">{toast.icon}</span>
         <div>
-          <p className="text-[var(--color-glow-amber)] text-[8px] uppercase tracking-widest mb-0.5 font-pixel">
+          <p className="text-[var(--color-glow-primary)] text-[8px] uppercase tracking-widest mb-0.5 font-pixel">
             Achievement Unlocked
           </p>
           <p className="text-[var(--color-text-bright)] text-sm font-medium">

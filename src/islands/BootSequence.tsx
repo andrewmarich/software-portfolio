@@ -28,7 +28,7 @@ type LineStyle = (typeof BOOT_LINES)[number]["style"];
 function getLineClass(style: LineStyle): string {
   switch (style) {
     case "header":
-      return "text-[var(--color-glow-amber)] font-bold";
+      return "text-[var(--color-glow-primary)] font-bold";
     case "dim":
       return "text-[var(--color-text-faint)]";
     case "success":
@@ -36,7 +36,7 @@ function getLineClass(style: LineStyle): string {
     case "cyan":
       return "text-[var(--color-neon-cyan)]";
     case "command":
-      return "text-[var(--color-glow-amber)]";
+      return "text-[var(--color-glow-primary)]";
     case "ready":
       return "text-[var(--color-phosphor)] font-bold text-lg tracking-wider";
     default:
@@ -136,7 +136,7 @@ export default function BootSequence() {
         {/* Dismiss prompt — only shows after all lines are visible */}
         {phase === "waiting" && (
           <p
-            className="mt-8 text-center text-[var(--color-glow-amber)] text-[8px] tracking-widest uppercase animate-pulse"
+            className="mt-8 text-center text-[var(--color-glow-primary)] text-[8px] tracking-widest uppercase animate-pulse"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             Tap or press any key to continue

@@ -31,7 +31,7 @@
   --color-text-faint: #4a4a60;
 
   /* Accents — terminal phosphor, arcade neon, CRT glow */
-  --color-glow-amber: #ffb000;
+  --color-glow-primary: #3b82f6;
   --color-neon-cyan: #00e5ff;
   --color-neon-magenta: #ff2d6f;
   --color-phosphor: #39ff14;
@@ -78,7 +78,7 @@ body {
 }
 
 ::selection {
-  background-color: color-mix(in oklch, var(--color-glow-amber), transparent 70%);
+  background-color: color-mix(in oklch, var(--color-glow-primary), transparent 70%);
   color: var(--color-text-bright);
 }
 

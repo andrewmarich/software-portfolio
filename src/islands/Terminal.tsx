@@ -225,7 +225,7 @@ export default function Terminal() {
         <div className="flex items-center justify-between px-4 py-2 bg-[var(--color-screen-panel)] border-b border-[var(--color-screen-raised)]">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 rounded-full bg-[var(--color-neon-magenta)]/60" />
-            <div className="w-3 h-3 rounded-full bg-[var(--color-glow-amber)]/60" />
+            <div className="w-3 h-3 rounded-full bg-[var(--color-glow-primary)]/60" />
             <div className="w-3 h-3 rounded-full bg-[var(--color-phosphor)]/60" />
           </div>
           <span className="text-[var(--color-text-faint)] text-xs">
@@ -250,7 +250,7 @@ export default function Terminal() {
               key={i}
               className={
                 line.type === "input"
-                  ? "text-[var(--color-glow-amber)]"
+                  ? "text-[var(--color-glow-primary)]"
                   : line.type === "error"
                     ? "text-[var(--color-neon-magenta)]"
                     : line.type === "success"
@@ -264,7 +264,7 @@ export default function Terminal() {
 
           {/* Input line */}
           <div className="flex items-center gap-2">
-            <span className="text-[var(--color-glow-amber)] shrink-0">
+            <span className="text-[var(--color-glow-primary)] shrink-0">
               visitor@marich.dev:~$
             </span>
             <input
@@ -279,7 +279,7 @@ export default function Terminal() {
                 }
               }}
               className="flex-1 bg-transparent text-[var(--color-text-bright)] outline-none
-                         caret-[var(--color-glow-amber)]"
+                         caret-[var(--color-glow-primary)]"
               autoComplete="off"
               spellCheck={false}
             />

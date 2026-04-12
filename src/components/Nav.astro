@@ -16,7 +16,7 @@ const links = [
     <!-- Left: Logo -->
     <a
       href="#"
-      class="font-mono text-sm text-glow-amber tracking-wide hover:glow-text--amber transition-all"
+      class="font-mono text-sm text-glow-primary tracking-wide hover:glow-text--primary transition-all"
     >
       marich.dev
     </a>
@@ -27,7 +27,7 @@ const links = [
         links.map((link) => (
           <a
             href={link.href}
-            class="font-mono text-xs text-text-muted hover:text-glow-amber transition-colors tracking-wide uppercase"
+            class="font-mono text-xs text-text-muted hover:text-glow-primary transition-colors tracking-wide uppercase"
           >
             {link.label}
           </a>
@@ -35,8 +35,8 @@ const links = [
       }
       <a
         href="#contact"
-        class="font-mono text-xs text-glow-amber border border-glow-amber/40 px-3 py-1 rounded
-               hover:bg-glow-amber/10 transition-all tracking-wide uppercase"
+        class="font-mono text-xs text-glow-primary border border-glow-primary/40 px-3 py-1 rounded
+               hover:bg-glow-primary/10 transition-all tracking-wide uppercase"
       >
         Contact
       </a>
@@ -53,7 +53,7 @@ const links = [
   <div class="md:hidden flex items-center justify-between h-14 px-6">
     <a
       href="#"
-      class="font-mono text-sm text-glow-amber tracking-wide hover:glow-text--amber transition-all"
+      class="font-mono text-sm text-glow-primary tracking-wide hover:glow-text--primary transition-all"
     >
       marich.dev
     </a>
@@ -61,7 +61,7 @@ const links = [
       <AchievementNav client:idle />
       <button
       id="mobile-menu-toggle"
-      class="text-text-muted hover:text-glow-amber transition-colors"
+      class="text-text-muted hover:text-glow-primary transition-colors"
       aria-label="Toggle menu"
       aria-expanded="false"
     >
@@ -91,7 +91,7 @@ const links = [
         links.map((link) => (
           <a
             href={link.href}
-            class="mobile-link font-mono text-sm text-text-muted hover:text-glow-amber transition-colors tracking-wide uppercase"
+            class="mobile-link font-mono text-sm text-text-muted hover:text-glow-primary transition-colors tracking-wide uppercase"
           >
             {link.label}
           </a>
@@ -99,7 +99,7 @@ const links = [
       }
       <a
         href="#contact"
-        class="mobile-link font-mono text-sm text-glow-amber tracking-wide uppercase"
+        class="mobile-link font-mono text-sm text-glow-primary tracking-wide uppercase"
       >
         Contact
       </a>

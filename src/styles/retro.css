@@ -7,7 +7,7 @@
 /* Blinking cursor — amber terminal style */
 .cursor-blink::after {
   content: "█";
-  color: var(--color-glow-amber);
+  color: var(--color-glow-primary);
   animation: blink 1s step-end infinite;
   margin-left: 2px;
 }
@@ -80,8 +80,8 @@
 }
 
 .glow-hover:hover {
-  box-shadow: 0 0 20px color-mix(in oklch, var(--color-glow-amber), transparent 75%);
-  border-color: color-mix(in oklch, var(--color-glow-amber), transparent 50%);
+  box-shadow: 0 0 20px color-mix(in oklch, var(--color-glow-primary), transparent 75%);
+  border-color: color-mix(in oklch, var(--color-glow-primary), transparent 50%);
 }
 
 /* Brand-colored glow hover — uses per-element --accent-rgb */
@@ -99,14 +99,14 @@
   text-shadow: 0 0 10px currentColor;
 }
 
-.glow-text--amber {
-  text-shadow: 0 0 10px var(--color-glow-amber), 0 0 30px color-mix(in oklch, var(--color-glow-amber), transparent 70%);
+.glow-text--primary {
+  text-shadow: 0 0 10px var(--color-glow-primary), 0 0 30px color-mix(in oklch, var(--color-glow-primary), transparent 70%);
 }
 
 /* Ambient underline glow for links */
 .glow-underline {
   text-decoration: none;
-  background-image: linear-gradient(var(--color-glow-amber), var(--color-glow-amber));
+  background-image: linear-gradient(var(--color-glow-primary), var(--color-glow-primary));
   background-size: 0% 1px;
   background-position: 0% 100%;
   background-repeat: no-repeat;
@@ -115,7 +115,7 @@
 
 .glow-underline:hover {
   background-size: 100% 1px;
-  text-shadow: 0 0 8px color-mix(in oklch, var(--color-glow-amber), transparent 60%);
+  text-shadow: 0 0 8px color-mix(in oklch, var(--color-glow-primary), transparent 60%);
 }
 
 /* Pixel border — 1px solid with retro feel */
@@ -127,7 +127,7 @@
 /* Terminal prompt prefix */
 .terminal-prompt::before {
   content: "> ";
-  color: var(--color-glow-amber);
+  color: var(--color-glow-primary);
   font-family: var(--font-mono);
 }
 
@@ -185,9 +185,9 @@
 }
 
 .pixel-tag:hover {
-  color: var(--color-glow-amber);
-  border-color: color-mix(in oklch, var(--color-glow-amber), transparent 60%);
-  background: color-mix(in oklch, var(--color-glow-amber), transparent 92%);
+  color: var(--color-glow-primary);
+  border-color: color-mix(in oklch, var(--color-glow-primary), transparent 60%);
+  background: color-mix(in oklch, var(--color-glow-primary), transparent 92%);
 }
 
 /*
@@ -199,7 +199,7 @@
   --color-text-bright: #39ff14;
   --color-text-muted: #2ab80e;
   --color-text-faint: #1a7a0a;
-  --color-glow-amber: #39ff14;
+  --color-glow-primary: #39ff14;
   --color-neon-cyan: #39ff14;
   --color-neon-magenta: #39ff14;
 }
