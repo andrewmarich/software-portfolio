@@ -150,7 +150,6 @@ export default function Terminal() {
     setLines((prev) => [...prev, ...newLines]);
   }, []);
 
-  // Keyboard shortcut: Ctrl+` to toggle
   useEffect(() => {
     function handleKey(e: KeyboardEvent) {
       if (e.key === "`" && (e.ctrlKey || e.metaKey)) {
@@ -164,20 +163,20 @@ export default function Terminal() {
           }
           return next;
         });
+      } else if (e.key === "Escape") {
+        setOpen(false);
       }
     }
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
   }, []);
 
-  // Focus input when opened
   useEffect(() => {
     if (!open) return;
     const id = setTimeout(() => inputRef.current?.focus(), 100);
     return () => clearTimeout(id);
   }, [open]);
 
-  // Auto-scroll to bottom
   useEffect(() => {
     if (scrollRef.current) {
       scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
@@ -186,20 +185,15 @@ export default function Terminal() {
 
   const handleTrapFocus = useCallback((e: ReactKeyboardEvent) => {
     if (e.key !== "Tab") return;
-    const focusable = [closeRef.current, inputRef.current].filter(Boolean) as HTMLElement[];
-    if (focusable.length === 0) return;
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (e.shiftKey) {
-      if (document.activeElement === first) {
-        e.preventDefault();
-        last.focus();
-      }
-    } else {
-      if (document.activeElement === last) {
-        e.preventDefault();
-        first.focus();
-      }
+    const first = closeRef.current;
+    const last = inputRef.current;
+    if (!first || !last) return;
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
     }
   }, []);
 
@@ -215,6 +209,9 @@ export default function Terminal() {
 
       {/* Terminal window */}
       <div
+        role="dialog"
+        aria-modal="true"
+        aria-label="Terminal"
         className="relative w-full max-w-2xl rounded-lg border overflow-hidden
                     border-[var(--color-screen-raised)]
                     bg-[var(--color-screen-void)]

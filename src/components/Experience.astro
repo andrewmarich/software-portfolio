@@ -1,4 +1,6 @@
 ---
+import SectionHeader from "./SectionHeader.astro";
+
 interface Role {
   company: string;
   title: string;
@@ -66,16 +68,11 @@ const education: Education[] = [
 const certifications = ["Linux Essentials", "ITIL Foundation", "HIPAA Associate"];
 ---
 
-<section id="experience" class="relative section-padding">
+<section id="experience" class="relative section-padding" aria-labelledby="experience-heading">
   <div class="max-w-6xl mx-auto px-6">
-    <!-- Section header -->
-    <p class="section-header mb-12">
-      <span class="text-glow-primary">&gt;</span> experience
-    </p>
+    <SectionHeader id="experience" label="experience" />
 
-    <!-- Timeline -->
     <div class="relative">
-      <!-- Timeline line -->
       <div
         class="absolute left-[7px] top-2 bottom-2 w-px hidden lg:block"
         style="background: repeating-linear-gradient(
@@ -128,11 +125,8 @@ const certifications = ["Linux Essentials", "ITIL Foundation", "HIPAA Associate"
       </div>
     </div>
 
-    <!-- Education -->
-    <div id="education" class="mt-20 scroll-mt-20">
-      <p class="section-header mb-8">
-        <span class="text-glow-primary">&gt;</span> education
-      </p>
+    <section id="education" class="mt-20 scroll-mt-20" aria-labelledby="education-heading">
+      <SectionHeader id="education" label="education" class="mb-8" />
 
       <div class="grid sm:grid-cols-2 gap-6">
         {
@@ -146,7 +140,6 @@ const certifications = ["Linux Essentials", "ITIL Foundation", "HIPAA Associate"
         }
       </div>
 
-      <!-- Certifications -->
       <div class="mt-6 flex flex-wrap gap-2">
         {
           certifications.map((cert) => (
@@ -154,6 +147,6 @@ const certifications = ["Linux Essentials", "ITIL Foundation", "HIPAA Associate"
           ))
         }
       </div>
-    </div>
+    </section>
   </div>
 </section>

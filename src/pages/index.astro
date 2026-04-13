@@ -16,16 +16,15 @@ import Terminal from "../islands/Terminal";
 ---
 
 <Base>
-  <!-- Boot sequence — client:load for immediate render -->
   <BootSequence client:load />
-
-  <!-- Easter eggs — lazy loaded, no impact on initial bundle -->
   <Achievements client:idle />
   <KonamiCode client:idle />
   <Terminal client:idle />
 
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
   <Nav />
-  <main class="pt-14">
+  <main id="main-content" class="pt-14">
     <Hero />
 
     <div class="reveal-section">

@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import leadsDashboard from "../assets/images/leads-dashboard.webp";
 import balanceDashboard from "../assets/images/balance-dashboard.webp";
 import portfolioScreenshot from "../assets/images/portfolio-screenshot.webp";
+import SectionHeader from "./SectionHeader.astro";
 
 interface Project {
   name: string;
@@ -48,17 +49,12 @@ const projects: Project[] = [
 ];
 ---
 
-<section id="projects" class="relative section-padding overflow-hidden">
-  <!-- Ambient glow -->
+<section id="projects" class="relative section-padding overflow-hidden" aria-labelledby="projects-heading">
   <div class="glow-pool glow-pool--primary glow-pool--right-center"></div>
 
   <div class="max-w-6xl mx-auto px-6">
-    <!-- Section header -->
-    <p class="section-header mb-12">
-      <span class="text-glow-primary">&gt;</span> ls projects/
-    </p>
+    <SectionHeader id="projects" label="ls projects/" />
 
-    <!-- Project cards -->
     <div class="space-y-6">
       {
         projects.map((project, i) => (
@@ -69,7 +65,6 @@ const projects: Project[] = [
             data-hover-glow
           >
             <div class="flex flex-col lg:flex-row gap-6">
-              <!-- Project image -->
               <div class="crt-hover rounded-md overflow-hidden bg-screen-dark border border-screen-raised/50
                           w-full lg:w-80 shrink-0 relative">
                 <Image
@@ -82,7 +77,6 @@ const projects: Project[] = [
                 />
               </div>
 
-              <!-- Project info -->
               <div class="flex-1 min-w-0">
                 <div class="flex items-center gap-3 mb-1">
                   <div class="w-2 h-2 rounded-full" style={`background: ${project.accent};`} />
@@ -99,7 +93,6 @@ const projects: Project[] = [
                   {project.description}
                 </p>
 
-                <!-- Tech tags -->
                 <div class="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (
                     <span class="pixel-tag rounded">{tag}</span>

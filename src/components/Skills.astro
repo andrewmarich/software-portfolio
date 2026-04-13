@@ -1,4 +1,6 @@
 ---
+import SectionHeader from "./SectionHeader.astro";
+
 interface SkillGroup {
   label: string;
   skills: string[];
@@ -32,15 +34,11 @@ const groups: SkillGroup[] = [
 ];
 ---
 
-<section id="skills" class="relative section-padding-tight overflow-hidden">
-  <!-- Ambient glow -->
+<section id="skills" class="relative section-padding-tight overflow-hidden" aria-labelledby="skills-heading">
   <div class="glow-pool glow-pool--cyan glow-pool--left-center"></div>
 
   <div class="max-w-6xl mx-auto px-6">
-    <!-- Section header -->
-    <p class="section-header mb-12">
-      <span class="text-glow-primary">&gt;</span> ls skills/
-    </p>
+    <SectionHeader id="skills" label="ls skills/" />
 
     <div class="grid sm:grid-cols-2 gap-8">
       {

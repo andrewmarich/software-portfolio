@@ -1,17 +1,14 @@
 ---
 import { Image } from "astro:assets";
 import profileImg from "../assets/images/profile.webp";
+import SectionHeader from "./SectionHeader.astro";
 ---
 
-<section id="about" class="relative section-padding">
+<section id="about" class="relative section-padding" aria-labelledby="about-heading">
   <div class="max-w-6xl mx-auto px-6">
-    <!-- Section header -->
-    <p class="section-header mb-12">
-      <span class="text-glow-primary">&gt;</span> about
-    </p>
+    <SectionHeader id="about" label="about" />
 
     <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
-      <!-- Photo column -->
       <div class="lg:col-span-2 flex justify-center lg:justify-start">
         <div class="crt-vignette rounded-lg overflow-hidden w-64 h-64 lg:w-full lg:h-auto lg:aspect-square bg-screen-panel border border-screen-raised/50">
           <Image
@@ -25,7 +22,6 @@ import profileImg from "../assets/images/profile.webp";
         </div>
       </div>
 
-      <!-- Bio column -->
       <div class="lg:col-span-3">
         <div class="space-y-5 text-text-muted leading-relaxed">
           <p>

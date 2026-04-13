@@ -138,6 +138,8 @@
   font-size: 0.875rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  font-weight: normal;
+  margin: 0;
 }
 
 /* Section padding — standard for content-heavy sections */
