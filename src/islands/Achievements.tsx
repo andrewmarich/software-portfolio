@@ -1,9 +1,29 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import { type Achievement, ACHIEVEMENTS, getUnlocked, saveUnlocked } from "./achievement-data";
+import type { Achievement } from "./achievement-data";
 
+const STORAGE_KEY = "marich-achievements";
 const VISIT_KEY = "marich-visited-before";
 
-export default function Achievements() {
+function getUnlocked(): Set<string> {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+function saveUnlocked(ids: Set<string>) {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify([...ids]));
+  } catch {}
+}
+
+interface Props {
+  achievements: Achievement[];
+}
+
+export default function Achievements({ achievements }: Props) {
   const [toast, setToast] = useState<Achievement | null>(null);
   const [visible, setVisible] = useState(false);
   const toastQueue = useRef<Achievement[]>([]);
@@ -44,7 +64,7 @@ export default function Achievements() {
       saveUnlocked(unlockedRef.current);
       window.dispatchEvent(new Event("achievement-unlocked"));
 
-      const achievement = ACHIEVEMENTS.find((a) => a.id === id);
+      const achievement = achievements.find((a) => a.id === id);
       if (!achievement) return;
 
       toastQueue.current.push(achievement);
@@ -52,7 +72,7 @@ export default function Achievements() {
         showNextToast();
       }
     },
-    [showNextToast],
+    [achievements, showNextToast],
   );
 
   useEffect(() => {

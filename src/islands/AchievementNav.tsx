@@ -1,8 +1,23 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { ACHIEVEMENTS, getUnlocked } from "./achievement-data";
+import type { Achievement } from "./achievement-data";
 import { useClickOutside } from "./hooks";
 
-export default function AchievementNav() {
+const STORAGE_KEY = "marich-achievements";
+
+function getUnlocked(): Set<string> {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    return raw ? new Set(JSON.parse(raw)) : new Set();
+  } catch {
+    return new Set();
+  }
+}
+
+interface Props {
+  achievements: Achievement[];
+}
+
+export default function AchievementNav({ achievements }: Props) {
   const [unlocked, setUnlocked] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -29,11 +44,11 @@ export default function AchievementNav() {
       <button
         onClick={() => setOpen((prev) => !prev)}
         className="flex cursor-pointer items-center gap-1.5 text-[var(--color-text-faint)] transition-colors hover:text-[var(--color-glow-primary)]"
-        aria-label={`Achievements: ${count} of ${ACHIEVEMENTS.length}`}
+        aria-label={`Achievements: ${count} of ${achievements.length}`}
       >
         <span className="text-xs">🏆</span>
         <span className="font-pixel text-[8px]">
-          {count}/{ACHIEVEMENTS.length}
+          {count}/{achievements.length}
         </span>
       </button>
 
@@ -41,11 +56,11 @@ export default function AchievementNav() {
         <div className="absolute top-8 right-0 z-50 w-[min(16rem,calc(100vw-2rem))] overflow-hidden rounded-lg border border-[var(--color-screen-raised)] bg-[var(--color-screen-panel)] shadow-xl shadow-black/30">
           <div className="border-b border-[var(--color-screen-raised)] px-3 py-2">
             <p className="font-pixel text-[7px] tracking-widest text-[var(--color-glow-primary)] uppercase">
-              Achievements — {count}/{ACHIEVEMENTS.length}
+              Achievements — {count}/{achievements.length}
             </p>
           </div>
           <div className="max-h-72 space-y-1 overflow-y-auto p-2">
-            {ACHIEVEMENTS.map((a) => {
+            {achievements.map((a) => {
               const isUnlocked = unlocked.has(a.id);
               return (
                 <div

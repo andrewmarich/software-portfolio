@@ -13,11 +13,12 @@ import BootSequence from "../islands/BootSequence";
 import Achievements from "../islands/Achievements";
 import KonamiCode from "../islands/KonamiCode";
 import Terminal from "../islands/Terminal";
+import { ACHIEVEMENTS } from "../islands/achievement-data";
 ---
 
 <Base>
   <BootSequence client:load />
-  <Achievements client:idle />
+  <Achievements achievements={ACHIEVEMENTS} client:idle />
   <KonamiCode client:idle />
   <Terminal client:idle />
 

@@ -1,3 +1,9 @@
+/**
+ * Static achievement catalogue. Imported by Astro pages at build time and
+ * passed down to the Achievements / AchievementNav islands as a prop so the
+ * data ships with the HTML instead of a second client-side chunk request.
+ */
+
 export interface Achievement {
   id: string;
   title: string;
@@ -49,20 +55,3 @@ export const ACHIEVEMENTS: Achievement[] = [
     icon: "🔄",
   },
 ];
-
-export const STORAGE_KEY = "marich-achievements";
-
-export function getUnlocked(): Set<string> {
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? new Set(JSON.parse(raw)) : new Set();
-  } catch {
-    return new Set();
-  }
-}
-
-export function saveUnlocked(ids: Set<string>) {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify([...ids]));
-  } catch {}
-}
