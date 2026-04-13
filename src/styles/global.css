@@ -31,6 +31,7 @@
 
 @import "./atmosphere.css";
 @import "./retro.css";
+@import "./print.css";
 
 /* Design tokens — retro gaming domain (CRT, arcade, terminal) */
 @theme {
@@ -133,43 +134,4 @@ body {
 }
 .skip-link:focus {
   top: 1rem;
-}
-
-/* Print */
-@media print {
-  html,
-  body {
-    background: white;
-    color: black;
-  }
-  .atmosphere-grain::before,
-  .atmosphere-scanlines::after,
-  .glow-pool,
-  nav,
-  .skip-link {
-    display: none;
-  }
-  a {
-    color: black;
-    text-decoration: underline;
-  }
-  a[href^="http"]::after,
-  a[href^="mailto:"]::after {
-    content: " (" attr(href) ")";
-    font-size: 0.85em;
-    color: #555;
-  }
-  .section-header {
-    color: #333;
-    border-bottom: 1px solid #999;
-    padding-bottom: 0.25rem;
-  }
-  .pixel-tag {
-    background: white;
-    color: black;
-    border: 1px solid #333;
-  }
-  section {
-    page-break-inside: avoid;
-  }
 }
