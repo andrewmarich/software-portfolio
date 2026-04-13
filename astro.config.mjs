@@ -10,6 +10,11 @@ export default defineConfig({
   site: "https://marich.dev",
   integrations: [react(), sitemap({ filter: (page) => !page.includes("/secret") })],
 
+  build: {
+    // Inline small stylesheets into <style> tags to eliminate render-blocking CSS requests.
+    inlineStylesheets: "auto",
+  },
+
   vite: {
     plugins: [tailwindcss()],
   },

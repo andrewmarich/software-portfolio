@@ -10,7 +10,7 @@ const links = [
 ---
 
 <nav
-  class="border-screen-raised/30 bg-screen-void/80 fixed top-0 right-0 left-0 z-[var(--z-nav)] border-b backdrop-blur-md"
+  class="border-screen-raised/60 bg-screen-void/95 fixed top-0 right-0 left-0 z-[var(--z-nav)] border-b backdrop-blur-md"
 >
   <div class="mx-auto hidden h-14 max-w-6xl grid-cols-3 items-center px-6 md:grid">
     <!-- Left: Logo -->
@@ -43,7 +43,7 @@ const links = [
 
     <!-- Right: Gamification -->
     <div class="flex items-center justify-end gap-3">
-      <ScrollProgress client:load />
+      <ScrollProgress client:idle />
       <AchievementNav client:idle />
     </div>
   </div>

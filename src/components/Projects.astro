@@ -72,8 +72,8 @@ const projects: Project[] = [
                 <Image
                   src={project.image}
                   alt={`${project.name} screenshot`}
-                  width={1200}
-                  height={657}
+                  widths={[320, 640, 960]}
+                  sizes="(min-width: 1024px) 320px, 100vw"
                   class="block h-auto w-full"
                   loading="lazy"
                 />

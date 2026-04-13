@@ -16,8 +16,8 @@ import SectionHeader from "./SectionHeader.astro";
           <Image
             src={profileImg}
             alt="Andrew Marich"
-            width={800}
-            height={800}
+            widths={[256, 512, 1024]}
+            sizes="(min-width: 1024px) 512px, 256px"
             class="h-full w-full object-cover"
             loading="lazy"
           />
