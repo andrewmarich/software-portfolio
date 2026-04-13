@@ -1,4 +1,10 @@
-import { useState, useEffect, useRef, useCallback, type KeyboardEvent as ReactKeyboardEvent } from "react";
+import {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  type KeyboardEvent as ReactKeyboardEvent,
+} from "react";
 
 interface TerminalLine {
   type: "input" | "output" | "error" | "success";
@@ -117,9 +123,7 @@ export default function Terminal() {
   const executeCommand = useCallback((cmd: string) => {
     const trimmed = cmd.trim().toLowerCase();
 
-    const newLines: TerminalLine[] = [
-      { type: "input", text: `visitor@marich.dev:~$ ${cmd}` },
-    ];
+    const newLines: TerminalLine[] = [{ type: "input", text: `visitor@marich.dev:~$ ${cmd}` }];
 
     if (trimmed === "clear") {
       setLines([
@@ -157,9 +161,7 @@ export default function Terminal() {
         setOpen((prev) => {
           const next = !prev;
           if (next) {
-            window.dispatchEvent(
-              new CustomEvent("achievement", { detail: "terminal" }),
-            );
+            window.dispatchEvent(new CustomEvent("achievement", { detail: "terminal" }));
           }
           return next;
         });
@@ -200,48 +202,43 @@ export default function Terminal() {
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-[var(--z-terminal)] flex items-center justify-center p-4 sm:p-8" onKeyDown={handleTrapFocus}>
-      {/* Backdrop */}
-      <div
-        className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+    <div className="fixed inset-0 z-[var(--z-terminal)] flex items-center justify-center p-4 sm:p-8">
+      <button
+        type="button"
+        tabIndex={-1}
+        aria-label="Close terminal"
+        className="absolute inset-0 cursor-default bg-black/60 backdrop-blur-sm"
         onClick={() => setOpen(false)}
       />
 
-      {/* Terminal window */}
+      {/* eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions -- focus trap is the correct pattern for modal dialogs */}
       <div
         role="dialog"
         aria-modal="true"
         aria-label="Terminal"
-        className="relative w-full max-w-2xl rounded-lg border overflow-hidden
-                    border-[var(--color-screen-raised)]
-                    bg-[var(--color-screen-void)]
-                    shadow-2xl shadow-black/50"
+        onKeyDown={handleTrapFocus}
+        className="relative w-full max-w-2xl overflow-hidden rounded-lg border border-[var(--color-screen-raised)] bg-[var(--color-screen-void)] shadow-2xl shadow-black/50"
         style={{ fontFamily: "var(--font-mono)" }}
       >
         {/* Title bar */}
-        <div className="flex items-center justify-between px-4 py-2 bg-[var(--color-screen-panel)] border-b border-[var(--color-screen-raised)]">
+        <div className="flex items-center justify-between border-b border-[var(--color-screen-raised)] bg-[var(--color-screen-panel)] px-4 py-2">
           <div className="flex items-center gap-2">
-            <div className="w-3 h-3 rounded-full bg-[var(--color-neon-magenta)]/60" />
-            <div className="w-3 h-3 rounded-full bg-[var(--color-glow-primary)]/60" />
-            <div className="w-3 h-3 rounded-full bg-[var(--color-phosphor)]/60" />
+            <div className="h-3 w-3 rounded-full bg-[var(--color-neon-magenta)]/60" />
+            <div className="h-3 w-3 rounded-full bg-[var(--color-glow-primary)]/60" />
+            <div className="h-3 w-3 rounded-full bg-[var(--color-phosphor)]/60" />
           </div>
-          <span className="text-[var(--color-text-faint)] text-xs">
-            visitor@marich.dev
-          </span>
+          <span className="text-xs text-[var(--color-text-faint)]">visitor@marich.dev</span>
           <button
             ref={closeRef}
             onClick={() => setOpen(false)}
-            className="text-[var(--color-text-faint)] hover:text-[var(--color-text-bright)] text-xs"
+            className="text-xs text-[var(--color-text-faint)] hover:text-[var(--color-text-bright)]"
           >
             ✕
           </button>
         </div>
 
         {/* Terminal body */}
-        <div
-          ref={scrollRef}
-          className="h-80 overflow-y-auto p-4 text-sm leading-relaxed"
-        >
+        <div ref={scrollRef} className="h-80 overflow-y-auto p-4 text-sm leading-relaxed">
           {lines.map((line, i) => (
             <div
               key={i}
@@ -261,9 +258,7 @@ export default function Terminal() {
 
           {/* Input line */}
           <div className="flex items-center gap-2">
-            <span className="text-[var(--color-glow-primary)] shrink-0">
-              visitor@marich.dev:~$
-            </span>
+            <span className="shrink-0 text-[var(--color-glow-primary)]">visitor@marich.dev:~$</span>
             <input
               ref={inputRef}
               type="text"
@@ -275,8 +270,7 @@ export default function Terminal() {
                   setInput("");
                 }
               }}
-              className="flex-1 bg-transparent text-[var(--color-text-bright)] outline-none
-                         caret-[var(--color-glow-primary)]"
+              className="flex-1 bg-transparent text-[var(--color-text-bright)] caret-[var(--color-glow-primary)] outline-none"
               autoComplete="off"
               spellCheck={false}
             />
@@ -284,9 +278,9 @@ export default function Terminal() {
         </div>
 
         {/* Hint bar */}
-        <div className="px-4 py-1.5 bg-[var(--color-screen-panel)] border-t border-[var(--color-screen-raised)]">
+        <div className="border-t border-[var(--color-screen-raised)] bg-[var(--color-screen-panel)] px-4 py-1.5">
           <span
-            className="text-[var(--color-text-faint)] text-[7px] tracking-wider uppercase"
+            className="text-[7px] tracking-wider text-[var(--color-text-faint)] uppercase"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             Ctrl+` to toggle • type "help" for commands

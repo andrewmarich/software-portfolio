@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 
 const KONAMI = [
-  "ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown",
-  "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight",
-  "b", "a",
+  "ArrowUp",
+  "ArrowUp",
+  "ArrowDown",
+  "ArrowDown",
+  "ArrowLeft",
+  "ArrowRight",
+  "ArrowLeft",
+  "ArrowRight",
+  "b",
+  "a",
 ];
 
 export default function KonamiCode() {
@@ -21,9 +28,7 @@ export default function KonamiCode() {
             const next = !prev;
             if (next) {
               document.documentElement.classList.add("retro-mode");
-              window.dispatchEvent(
-                new CustomEvent("achievement", { detail: "konami" }),
-              );
+              window.dispatchEvent(new CustomEvent("achievement", { detail: "konami" }));
             } else {
               document.documentElement.classList.remove("retro-mode");
             }
@@ -42,13 +47,9 @@ export default function KonamiCode() {
   if (!retroMode) return null;
 
   return (
-    <div
-      className="fixed top-16 left-1/2 -translate-x-1/2 z-[var(--z-overlay)] px-4 py-2 rounded
-                  border border-[var(--color-phosphor)]/40
-                  bg-[var(--color-screen-panel)]"
-    >
+    <div className="fixed top-16 left-1/2 z-[var(--z-overlay)] -translate-x-1/2 rounded border border-[var(--color-phosphor)]/40 bg-[var(--color-screen-panel)] px-4 py-2">
       <p
-        className="text-[var(--color-phosphor)] text-[8px] tracking-wider uppercase"
+        className="text-[8px] tracking-wider text-[var(--color-phosphor)] uppercase"
         style={{ fontFamily: "var(--font-pixel)" }}
       >
         Retro Mode Active — ↑↑↓↓←→←→BA to toggle

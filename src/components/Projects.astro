@@ -49,49 +49,49 @@ const projects: Project[] = [
 ];
 ---
 
-<section id="projects" class="relative section-padding overflow-hidden" aria-labelledby="projects-heading">
+<section
+  id="projects"
+  class="section-padding relative overflow-hidden"
+  aria-labelledby="projects-heading"
+>
   <div class="glow-pool glow-pool--primary glow-pool--right-center"></div>
 
-  <div class="max-w-6xl mx-auto px-6">
+  <div class="mx-auto max-w-6xl px-6">
     <SectionHeader id="projects" label="ls projects/" />
 
     <div class="space-y-6">
       {
         projects.map((project, i) => (
           <article
-            class="stagger-child relative bg-screen-panel/50 border border-screen-raised/20 rounded-lg p-6 lg:p-8
-                   transition-all duration-300"
+            class="stagger-child bg-screen-panel/50 border-screen-raised/20 relative rounded-lg border p-6 transition-all duration-300 lg:p-8"
             style={`--accent: ${project.accent}; --accent-rgb: ${project.accentRgb}; --stagger: ${i}`}
             data-hover-glow
           >
-            <div class="flex flex-col lg:flex-row gap-6">
-              <div class="crt-hover rounded-md overflow-hidden bg-screen-dark border border-screen-raised/50
-                          w-full lg:w-80 shrink-0 relative">
+            <div class="flex flex-col gap-6 lg:flex-row">
+              <div class="crt-hover bg-screen-dark border-screen-raised/50 relative w-full shrink-0 overflow-hidden rounded-md border lg:w-80">
                 <Image
                   src={project.image}
                   alt={`${project.name} screenshot`}
                   width={1200}
                   height={657}
-                  class="w-full h-auto block"
+                  class="block h-auto w-full"
                   loading="lazy"
                 />
               </div>
 
-              <div class="flex-1 min-w-0">
-                <div class="flex items-center gap-3 mb-1">
-                  <div class="w-2 h-2 rounded-full" style={`background: ${project.accent};`} />
-                  <h3 class="font-semibold text-xl" style={`color: ${project.accent};`}>
+              <div class="min-w-0 flex-1">
+                <div class="mb-1 flex items-center gap-3">
+                  <div class="h-2 w-2 rounded-full" style={`background: ${project.accent};`} />
+                  <h3 class="text-xl font-semibold" style={`color: ${project.accent};`}>
                     {project.name}
                   </h3>
                 </div>
 
-                <p class="font-mono text-xs text-text-faint mb-3 uppercase tracking-wider pl-5">
+                <p class="text-text-faint mb-3 pl-5 font-mono text-xs tracking-wider uppercase">
                   {project.subtitle}
                 </p>
 
-                <p class="text-text-muted leading-relaxed mb-4">
-                  {project.description}
-                </p>
+                <p class="text-text-muted mb-4 leading-relaxed">{project.description}</p>
 
                 <div class="flex flex-wrap gap-2">
                   {project.tags.map((tag) => (

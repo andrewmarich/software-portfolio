@@ -10,13 +10,13 @@ const links = [
 ---
 
 <nav
-  class="fixed top-0 left-0 right-0 z-[var(--z-nav)] border-b border-screen-raised/30 backdrop-blur-md bg-screen-void/80"
+  class="border-screen-raised/30 bg-screen-void/80 fixed top-0 right-0 left-0 z-[var(--z-nav)] border-b backdrop-blur-md"
 >
-  <div class="max-w-6xl mx-auto px-6 hidden md:grid grid-cols-3 items-center h-14">
+  <div class="mx-auto hidden h-14 max-w-6xl grid-cols-3 items-center px-6 md:grid">
     <!-- Left: Logo -->
     <a
-      href="#"
-      class="font-mono text-sm text-glow-primary tracking-wide hover:glow-text--primary transition-all"
+      href="#hero"
+      class="text-glow-primary hover:glow-text--primary font-mono text-sm tracking-wide transition-all"
     >
       marich.dev
     </a>
@@ -27,7 +27,7 @@ const links = [
         links.map((link) => (
           <a
             href={link.href}
-            class="font-mono text-xs text-text-muted hover:text-glow-primary transition-colors tracking-wide uppercase"
+            class="text-text-muted hover:text-glow-primary font-mono text-xs tracking-wide uppercase transition-colors"
           >
             {link.label}
           </a>
@@ -35,8 +35,7 @@ const links = [
       }
       <a
         href="#contact"
-        class="font-mono text-xs text-glow-primary border border-glow-primary/40 px-3 py-1 rounded
-               hover:bg-glow-primary/10 transition-all tracking-wide uppercase"
+        class="text-glow-primary border-glow-primary/40 hover:bg-glow-primary/10 rounded border px-3 py-1 font-mono text-xs tracking-wide uppercase transition-all"
       >
         Contact
       </a>
@@ -50,48 +49,48 @@ const links = [
   </div>
 
   <!-- Mobile header -->
-  <div class="md:hidden flex items-center justify-between h-14 px-6">
+  <div class="flex h-14 items-center justify-between px-6 md:hidden">
     <a
-      href="#"
-      class="font-mono text-sm text-glow-primary tracking-wide hover:glow-text--primary transition-all"
+      href="#hero"
+      class="text-glow-primary hover:glow-text--primary font-mono text-sm tracking-wide transition-all"
     >
       marich.dev
     </a>
     <div class="flex items-center gap-3">
       <AchievementNav client:idle />
       <button
-      id="mobile-menu-toggle"
-      class="text-text-muted hover:text-glow-primary transition-colors"
-      aria-label="Toggle menu"
-      aria-expanded="false"
-    >
-      <svg
-        width="20"
-        height="20"
-        viewBox="0 0 20 20"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="1.5"
+        id="mobile-menu-toggle"
+        class="text-text-muted hover:text-glow-primary transition-colors"
+        aria-label="Toggle menu"
+        aria-expanded="false"
       >
-        <line x1="3" y1="5" x2="17" y2="5"></line>
-        <line x1="3" y1="10" x2="17" y2="10"></line>
-        <line x1="3" y1="15" x2="17" y2="15"></line>
-      </svg>
-    </button>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.5"
+        >
+          <line x1="3" y1="5" x2="17" y2="5"></line>
+          <line x1="3" y1="10" x2="17" y2="10"></line>
+          <line x1="3" y1="15" x2="17" y2="15"></line>
+        </svg>
+      </button>
     </div>
   </div>
 
   <!-- Mobile menu -->
   <div
     id="mobile-menu"
-    class="hidden md:hidden border-t border-screen-raised/50 bg-screen-void/95 backdrop-blur-md"
+    class="border-screen-raised/50 bg-screen-void/95 hidden border-t backdrop-blur-md md:hidden"
   >
-    <div class="px-6 py-4 flex flex-col gap-3">
+    <div class="flex flex-col gap-3 px-6 py-4">
       {
         links.map((link) => (
           <a
             href={link.href}
-            class="mobile-link font-mono text-sm text-text-muted hover:text-glow-primary transition-colors tracking-wide uppercase"
+            class="mobile-link text-text-muted hover:text-glow-primary font-mono text-sm tracking-wide uppercase transition-colors"
           >
             {link.label}
           </a>
@@ -99,7 +98,7 @@ const links = [
       }
       <a
         href="#contact"
-        class="mobile-link font-mono text-sm text-glow-primary tracking-wide uppercase"
+        class="mobile-link text-glow-primary font-mono text-sm tracking-wide uppercase"
       >
         Contact
       </a>

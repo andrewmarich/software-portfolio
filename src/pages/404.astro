@@ -3,24 +3,14 @@ import Base from "../layouts/Base.astro";
 ---
 
 <Base title="404 — marich.dev">
-  <div class="min-h-screen flex items-center justify-center px-6">
+  <div class="flex min-h-screen items-center justify-center px-6">
     <div class="text-center">
-      <p
-        class="font-pixel text-glow-primary text-xl sm:text-2xl mb-4"
-      >
-        404
-      </p>
-      <p class="font-mono text-text-muted text-lg mb-2">
-        This page doesn't exist yet.
-      </p>
-      <p class="text-text-faint text-sm mb-8">
-        Maybe it's a locked area. Maybe it never was.
-      </p>
+      <p class="font-pixel text-glow-primary mb-4 text-xl sm:text-2xl">404</p>
+      <p class="text-text-muted mb-2 font-mono text-lg">This page doesn't exist yet.</p>
+      <p class="text-text-faint mb-8 text-sm">Maybe it's a locked area. Maybe it never was.</p>
       <a
         href="/"
-        class="inline-flex items-center gap-2 px-5 py-2.5 font-mono text-sm
-               border border-text-faint text-text-muted rounded
-               hover:border-glow-primary hover:text-glow-primary transition-all"
+        class="border-text-faint text-text-muted hover:border-glow-primary hover:text-glow-primary inline-flex items-center gap-2 rounded border px-5 py-2.5 font-mono text-sm transition-all"
       >
         ← Back to start
       </a>

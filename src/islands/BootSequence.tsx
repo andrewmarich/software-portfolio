@@ -46,9 +46,7 @@ function getLineClass(style: LineStyle): string {
 
 export default function BootSequence() {
   const [visibleLines, setVisibleLines] = useState<number>(0);
-  const [phase, setPhase] = useState<"typing" | "waiting" | "flash" | "done">(
-    "typing",
-  );
+  const [phase, setPhase] = useState<"typing" | "waiting" | "flash" | "done">("typing");
   const [skipBoot, setSkipBoot] = useState(false);
 
   const finishBoot = useCallback(() => {
@@ -116,14 +114,12 @@ export default function BootSequence() {
 
   return (
     <div
-      className={`fixed inset-0 z-[var(--z-boot)] flex items-center justify-center
-                   bg-[var(--color-screen-void)] transition-opacity duration-300
-                   ${phase === "flash" ? "opacity-0" : "opacity-100"}`}
+      className={`fixed inset-0 z-[var(--z-boot)] flex items-center justify-center bg-[var(--color-screen-void)] transition-opacity duration-300 ${phase === "flash" ? "opacity-0" : "opacity-100"}`}
       role="presentation"
     >
-      <div className="max-w-xl w-full px-6">
+      <div className="w-full max-w-xl px-6">
         <pre
-          className="text-xs sm:text-sm leading-relaxed select-none"
+          className="text-xs leading-relaxed select-none sm:text-sm"
           style={{ fontFamily: "var(--font-mono)" }}
         >
           {BOOT_LINES.slice(0, visibleLines).map((line, i) => (
@@ -136,7 +132,7 @@ export default function BootSequence() {
         {/* Dismiss prompt — only shows after all lines are visible */}
         {phase === "waiting" && (
           <p
-            className="mt-8 text-center text-[var(--color-glow-primary)] text-[8px] tracking-widest uppercase animate-pulse"
+            className="mt-8 animate-pulse text-center text-[8px] tracking-widest text-[var(--color-glow-primary)] uppercase"
             style={{ fontFamily: "var(--font-pixel)" }}
           >
             Tap or press any key to continue

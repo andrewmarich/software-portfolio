@@ -1,10 +1,5 @@
-/*
- * Retro effect utilities
- * CRT hover effects, glow states, blinking cursor,
- * pixel borders, and terminal-style accents.
- */
+/* Retro effects, design utilities, and the Konami-code retro mode override. */
 
-/* Blinking cursor — amber terminal style */
 .cursor-blink::after {
   content: "█";
   color: var(--color-glow-primary);
@@ -13,11 +8,16 @@
 }
 
 @keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
-/* CRT vignette — darkened edges like a CRT monitor */
+/* CRT */
 .crt-vignette {
   position: relative;
   overflow: hidden;
@@ -32,7 +32,6 @@
   box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
 }
 
-/* CRT scanline hover — applied to project images */
 .crt-hover {
   position: relative;
   overflow: hidden;
@@ -55,10 +54,6 @@
   );
 }
 
-.crt-hover:hover::before {
-  opacity: 1;
-}
-
 .crt-hover::after {
   content: "";
   position: absolute;
@@ -70,13 +65,16 @@
   box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
 }
 
+.crt-hover:hover::before,
 .crt-hover:hover::after {
   opacity: 1;
 }
 
-/* Glow hover — amber accent glow on interactive elements */
+/* Glow */
 .glow-hover {
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .glow-hover:hover {
@@ -84,9 +82,11 @@
   border-color: color-mix(in oklch, var(--color-glow-primary), transparent 50%);
 }
 
-/* Brand-colored glow hover — uses per-element --accent-rgb */
+/* Per-element accent glow — reads --accent-rgb from inline style */
 [data-hover-glow] {
-  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
 }
 
 [data-hover-glow]:hover {
@@ -94,16 +94,12 @@
   border-color: rgba(var(--accent-rgb), 0.3);
 }
 
-/* Glow text — subtle text glow effect */
-.glow-text {
-  text-shadow: 0 0 10px currentColor;
-}
-
 .glow-text--primary {
-  text-shadow: 0 0 10px var(--color-glow-primary), 0 0 30px color-mix(in oklch, var(--color-glow-primary), transparent 70%);
+  text-shadow:
+    0 0 10px var(--color-glow-primary),
+    0 0 30px color-mix(in oklch, var(--color-glow-primary), transparent 70%);
 }
 
-/* Ambient underline glow for links */
 .glow-underline {
   text-decoration: none;
   background-image: linear-gradient(var(--color-glow-primary), var(--color-glow-primary));
@@ -118,20 +114,7 @@
   text-shadow: 0 0 8px color-mix(in oklch, var(--color-glow-primary), transparent 60%);
 }
 
-/* Pixel border — 1px solid with retro feel */
-.pixel-border {
-  border: 1px solid var(--color-screen-raised);
-  image-rendering: pixelated;
-}
-
-/* Terminal prompt prefix */
-.terminal-prompt::before {
-  content: "> ";
-  color: var(--color-glow-primary);
-  font-family: var(--font-mono);
-}
-
-/* Section header style */
+/* Section layout */
 .section-header {
   font-family: var(--font-mono);
   color: var(--color-text-muted);
@@ -142,7 +125,6 @@
   margin: 0;
 }
 
-/* Section padding — standard for content-heavy sections */
 .section-padding {
   padding-block: 4rem;
 }
@@ -157,7 +139,6 @@
   }
 }
 
-/* Section padding — tighter variant for shorter sections */
 .section-padding-tight {
   padding-block: 4rem;
 }
@@ -167,7 +148,7 @@
   }
 }
 
-/* Pixel tag — tiny Press Start 2P labels */
+/* Pixel tag — slightly larger on mobile for readability */
 .pixel-tag {
   font-family: var(--font-pixel);
   font-size: 0.625rem;
@@ -192,11 +173,7 @@
   background: color-mix(in oklch, var(--color-glow-primary), transparent 92%);
 }
 
-/*
- * Retro Mode — activated via Konami Code (↑↑↓↓←→←→BA)
- * Cranks up the CRT effects, switches to phosphor green,
- * and makes everything feel like a 1983 terminal.
- */
+/* Retro mode — Konami code (↑↑↓↓←→←→BA): phosphor green, monospace, heavy CRT */
 :root.retro-mode {
   --color-text-bright: #39ff14;
   --color-text-muted: #2ab80e;
@@ -210,10 +187,7 @@
   font-family: var(--font-mono) !important;
 }
 
-.retro-mode .atmosphere-grain::before {
-  opacity: 0.08;
-}
-
+.retro-mode .atmosphere-grain::before,
 .retro-mode .atmosphere-scanlines::after {
   opacity: 0.08;
 }

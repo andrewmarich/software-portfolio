@@ -9,27 +9,31 @@ export default function Achievements() {
   const toastQueue = useRef<Achievement[]>([]);
   const isShowingToast = useRef(false);
   const unlockedRef = useRef<Set<string>>(new Set());
+  const mountedRef = useRef(true);
 
   useEffect(() => {
     unlockedRef.current = getUnlocked();
+    return () => {
+      mountedRef.current = false;
+    };
   }, []);
 
-  const showNextToast = useCallback(() => {
-    if (toastQueue.current.length === 0) {
-      isShowingToast.current = false;
-      return;
-    }
-
+  const showNextToast = useCallback(async () => {
+    if (isShowingToast.current) return;
     isShowingToast.current = true;
-    const achievement = toastQueue.current.shift()!;
-    setToast(achievement);
-    setVisible(true);
-
-    setTimeout(() => setVisible(false), 3000);
-    setTimeout(() => {
+    const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+    while (toastQueue.current.length > 0 && mountedRef.current) {
+      const achievement = toastQueue.current.shift()!;
+      setToast(achievement);
+      setVisible(true);
+      await wait(3000);
+      if (!mountedRef.current) return;
+      setVisible(false);
+      await wait(500);
+      if (!mountedRef.current) return;
       setToast(null);
-      showNextToast();
-    }, 3500);
+    }
+    isShowingToast.current = false;
   }, []);
 
   const unlock = useCallback(
@@ -52,19 +56,21 @@ export default function Achievements() {
   );
 
   useEffect(() => {
+    const timers: ReturnType<typeof setTimeout>[] = [];
+
     try {
       if (localStorage.getItem(VISIT_KEY)) {
-        setTimeout(() => unlock("return-visit"), 1500);
+        timers.push(setTimeout(() => unlock("return-visit"), 1500));
       }
       localStorage.setItem(VISIT_KEY, "1");
     } catch {}
 
-    setTimeout(() => unlock("first-visit"), 2500);
+    timers.push(setTimeout(() => unlock("first-visit"), 2500));
+    timers.push(setTimeout(() => unlock("idle-60"), 60000));
 
     function checkScroll() {
       const scrollTop = window.scrollY;
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0 && scrollTop / docHeight > 0.95) {
         unlock("scroll-bottom");
       }
@@ -78,8 +84,6 @@ export default function Achievements() {
     }
     document.addEventListener("click", checkContact);
 
-    const idleTimer = setTimeout(() => unlock("idle-60"), 60000);
-
     function handleAchievement(e: Event) {
       unlock((e as CustomEvent<string>).detail);
     }
@@ -88,8 +92,8 @@ export default function Achievements() {
     return () => {
       window.removeEventListener("scroll", checkScroll);
       document.removeEventListener("click", checkContact);
-      clearTimeout(idleTimer);
       window.removeEventListener("achievement", handleAchievement);
+      timers.forEach(clearTimeout);
     };
   }, [unlock]);
 
@@ -99,26 +103,16 @@ export default function Achievements() {
     <div
       role="status"
       aria-live="polite"
-      className={`fixed bottom-6 right-6 z-[var(--z-overlay)] max-w-xs transition-all duration-500
-                   ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}
+      className={`fixed right-6 bottom-6 z-[var(--z-overlay)] max-w-xs transition-all duration-500 ${visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
     >
-      <div
-        className="flex items-center gap-3 px-4 py-3 rounded-lg border
-                    border-[var(--color-glow-primary)]/30
-                    bg-[var(--color-screen-panel)] shadow-lg
-                    shadow-[var(--color-glow-primary)]/5"
-      >
+      <div className="flex items-center gap-3 rounded-lg border border-[var(--color-glow-primary)]/30 bg-[var(--color-screen-panel)] px-4 py-3 shadow-[var(--color-glow-primary)]/5 shadow-lg">
         <span className="text-xl">{toast.icon}</span>
         <div>
-          <p className="text-[var(--color-glow-primary)] text-[8px] uppercase tracking-widest mb-0.5 font-pixel">
+          <p className="font-pixel mb-0.5 text-[8px] tracking-widest text-[var(--color-glow-primary)] uppercase">
             Achievement Unlocked
           </p>
-          <p className="text-[var(--color-text-bright)] text-sm font-medium">
-            {toast.title}
-          </p>
-          <p className="text-[var(--color-text-faint)] text-xs font-mono">
-            {toast.description}
-          </p>
+          <p className="text-sm font-medium text-[var(--color-text-bright)]">{toast.title}</p>
+          <p className="font-mono text-xs text-[var(--color-text-faint)]">{toast.description}</p>
         </div>
       </div>
     </div>

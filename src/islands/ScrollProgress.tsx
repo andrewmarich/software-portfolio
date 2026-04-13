@@ -31,8 +31,7 @@ export default function ScrollProgress() {
     function update() {
       rafId = null;
       const scrollTop = window.scrollY;
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       const nextFilled = Math.round(progress / 5);
 
@@ -65,36 +64,32 @@ export default function ScrollProgress() {
 
   return (
     <div
-      className="hidden lg:flex items-center gap-2 text-xs relative font-pixel"
+      className="font-pixel relative hidden items-center gap-2 text-xs lg:flex"
       aria-label={`Page scroll progress: ${progressPercent}%`}
     >
       <span
         className={`text-[8px] transition-colors duration-300 ${
-          levelUp
-            ? "text-[var(--color-glow-primary)]"
-            : "text-[var(--color-text-faint)]"
+          levelUp ? "text-[var(--color-glow-primary)]" : "text-[var(--color-text-faint)]"
         }`}
       >
         {level.label}
       </span>
       <div className="flex items-center gap-px">
-        <span className="text-[var(--color-text-faint)] text-[10px]">[</span>
+        <span className="text-[10px] text-[var(--color-text-faint)]">[</span>
         {Array.from({ length: BAR_SEGMENTS }).map((_, i) => (
           <span
             key={i}
-            className={`inline-block w-1.5 h-2.5 transition-colors duration-150 ${
-              i < filled
-                ? "bg-[var(--color-glow-primary)]"
-                : "bg-[var(--color-screen-raised)]"
+            className={`inline-block h-2.5 w-1.5 transition-colors duration-150 ${
+              i < filled ? "bg-[var(--color-glow-primary)]" : "bg-[var(--color-screen-raised)]"
             }`}
           />
         ))}
-        <span className="text-[var(--color-text-faint)] text-[10px]">]</span>
+        <span className="text-[10px] text-[var(--color-text-faint)]">]</span>
       </div>
-      <span className="text-[var(--color-text-faint)] text-[7px]">XP</span>
+      <span className="text-[7px] text-[var(--color-text-faint)]">XP</span>
 
       {levelUp && (
-        <div className="absolute -top-8 left-1/2 -translate-x-1/2 whitespace-nowrap text-[var(--color-glow-primary)] text-[8px] animate-bounce font-pixel">
+        <div className="font-pixel absolute -top-8 left-1/2 -translate-x-1/2 animate-bounce text-[8px] whitespace-nowrap text-[var(--color-glow-primary)]">
           LVL UP!
         </div>
       )}

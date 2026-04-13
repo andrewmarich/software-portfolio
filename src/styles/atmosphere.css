@@ -1,13 +1,5 @@
-/*
- * Atmosphere layers
- * Creates the feeling of a dark room with colored light sources —
- * like an arcade cabinet glowing in the dark.
- *
- * All layers use ::before/::after pseudo-elements on a wrapper
- * so they don't interfere with content interaction.
- */
+/* Atmospheric layers — grain, scanlines, dot grid, and ambient glow pools. */
 
-/* Noise grain — adds tactile CRT texture */
 .atmosphere-grain::before {
   content: "";
   position: fixed;
@@ -20,7 +12,6 @@
   background-size: 256px 256px;
 }
 
-/* Scanline overlay — horizontal lines, signature CRT feel */
 .atmosphere-scanlines::after {
   content: "";
   position: fixed;
@@ -37,18 +28,13 @@
   );
 }
 
-/* Dot grid — faint display raster pattern */
 .atmosphere-dots {
-  background-image: radial-gradient(
-    circle,
-    var(--color-text-faint) 0.5px,
-    transparent 0.5px
-  );
+  background-image: radial-gradient(circle, var(--color-text-faint) 0.5px, transparent 0.5px);
   background-size: 24px 24px;
   background-position: center;
 }
 
-/* Ambient glow pools — colored light sources behind content */
+/* Glow pools — combine one color modifier with one position modifier */
 .glow-pool {
   position: absolute;
   border-radius: 50%;
@@ -67,18 +53,15 @@
   background: var(--color-glow-primary);
   opacity: 0.06;
 }
-
 .glow-pool--cyan {
   background: var(--color-neon-cyan);
   opacity: 0.04;
 }
-
 .glow-pool--magenta {
   background: var(--color-neon-magenta);
   opacity: 0.03;
 }
 
-/* Position modifiers — scale down on mobile via transform */
 .glow-pool--top-right {
   top: -100px;
   right: -100px;
@@ -86,7 +69,6 @@
   height: 500px;
   transform: scale(0.55);
 }
-
 .glow-pool--bottom-left {
   bottom: -50px;
   left: -150px;
@@ -94,7 +76,6 @@
   height: 400px;
   transform: scale(0.55);
 }
-
 .glow-pool--right-center {
   top: 50%;
   right: -200px;
@@ -102,7 +83,6 @@
   height: 600px;
   transform: translateY(-50%) scale(0.55);
 }
-
 .glow-pool--left-center {
   top: 50%;
   left: -200px;

@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { personSchema } from "../lib/person-schema";
 
 interface Props {
   title?: string;
@@ -10,6 +11,8 @@ const {
   title = "Andrew Marich — Full-Stack Engineer",
   description = "Full-stack engineer building scalable systems across the stack. React, Django, TypeScript, cloud infrastructure.",
 } = Astro.props;
+
+const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
 ---
 
 <!doctype html>
@@ -52,19 +55,51 @@ const {
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={Astro.url.href} />
-    <meta property="og:image" content={new URL("/images/portfolio-screenshot.png", Astro.site)} />
+    <meta property="og:image" content={new URL("/images/og-image.jpg", Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Andrew Marich — Full-Stack Engineer" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL("/images/portfolio-screenshot.png", Astro.site)} />
+    <meta name="twitter:image" content={new URL("/images/og-image.jpg", Astro.site)} />
 
     <meta name="theme-color" content="#08080f" />
     <link rel="apple-touch-icon" href="/images/am-logo.png" />
 
+    <!-- Preload body font to eliminate FOUT on initial paint -->
+    <link
+      rel="preload"
+      href="/fonts/outfit-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/outfit-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <!-- Structured data — Person schema -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
     <!-- For the curious -->
     <link rel="author" href="/humans.txt" />
+
+    {
+      cfAnalyticsToken && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${cfAnalyticsToken}"}`}
+        />
+      )
+    }
   </head>
   <body class="atmosphere-grain atmosphere-scanlines min-h-screen">
     <slot />
@@ -73,29 +108,29 @@ const {
     <script is:inline>
       console.log(
         "%c" +
-        "  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗██╗  ██╗\n" +
-        "  ████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║  ██║\n" +
-        "  ██╔████╔██║███████║██████╔╝██║██║     ███████║\n" +
-        "  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║     ██╔══██║\n" +
-        "  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╗██║  ██║\n" +
-        "  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝",
-        "color: #3b82f6; font-family: monospace; font-size: 10px;"
+          "  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗██╗  ██╗\n" +
+          "  ████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║  ██║\n" +
+          "  ██╔████╔██║███████║██████╔╝██║██║     ███████║\n" +
+          "  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║     ██╔══██║\n" +
+          "  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╗██║  ██║\n" +
+          "  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝",
+        "color: #3b82f6; font-family: monospace; font-size: 10px;",
       );
       console.log(
         "%cYou opened the console. A person of culture, I see.",
-        "color: #8888a0; font-family: monospace; font-size: 12px; padding: 4px 0;"
+        "color: #8888a0; font-family: monospace; font-size: 12px; padding: 4px 0;",
       );
       console.log(
         "%cHint: try the Konami Code, or press Ctrl + ` for more fun.",
-        "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;"
+        "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;",
       );
       console.log(
         "%cBuilt with Astro 6, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
-        "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;"
+        "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;",
       );
       console.log(
         "%cLooking to collaborate? → andrew@marich.dev",
-        "color: #3b82f6; font-family: monospace; font-size: 11px; padding: 4px 0;"
+        "color: #3b82f6; font-family: monospace; font-size: 11px; padding: 4px 0;",
       );
     </script>
   </body>

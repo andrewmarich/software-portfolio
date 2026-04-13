@@ -4,52 +4,47 @@ import profileImg from "../assets/images/profile.webp";
 import SectionHeader from "./SectionHeader.astro";
 ---
 
-<section id="about" class="relative section-padding" aria-labelledby="about-heading">
-  <div class="max-w-6xl mx-auto px-6">
+<section id="about" class="section-padding relative" aria-labelledby="about-heading">
+  <div class="mx-auto max-w-6xl px-6">
     <SectionHeader id="about" label="about" />
 
-    <div class="grid lg:grid-cols-5 gap-12 lg:gap-16 items-start">
-      <div class="lg:col-span-2 flex justify-center lg:justify-start">
-        <div class="crt-vignette rounded-lg overflow-hidden w-64 h-64 lg:w-full lg:h-auto lg:aspect-square bg-screen-panel border border-screen-raised/50">
+    <div class="grid items-start gap-12 lg:grid-cols-5 lg:gap-16">
+      <div class="flex justify-center lg:col-span-2 lg:justify-start">
+        <div
+          class="crt-vignette bg-screen-panel border-screen-raised/50 h-64 w-64 overflow-hidden rounded-lg border lg:aspect-square lg:h-auto lg:w-full"
+        >
           <Image
             src={profileImg}
             alt="Andrew Marich"
             width={800}
             height={800}
-            class="w-full h-full object-cover"
+            class="h-full w-full object-cover"
             loading="lazy"
           />
         </div>
       </div>
 
       <div class="lg:col-span-3">
-        <div class="space-y-5 text-text-muted leading-relaxed">
+        <div class="text-text-muted space-y-5 leading-relaxed">
           <p>
-            I'm a full-stack engineer out of Gilbert, Arizona. Grew up in
-            Tucson and got my start in
-            <span class="text-text-bright">Finance</span> at the University
-            of Arizona, realized I liked building software more than
-            analyzing spreadsheets, and went back for a
-            <span class="text-text-bright">Computer Science</span> degree
-            from WGU.
+            I'm a full-stack engineer out of Gilbert, Arizona. Grew up in Tucson and got my start in
+            <span class="text-text-bright">Finance</span> at the University of Arizona, realized I liked
+            building software more than analyzing spreadsheets, and went back for a
+            <span class="text-text-bright">Computer Science</span> degree from WGU.
           </p>
           <p>
             These days I split my time between two roles. At
-            <span style="color: oklch(64% .204 222);">B1 Marketing Group</span> I'm
-            developing the company's software and tooling from the
-            ground up. I'm also CTO and co-founder of
-            <span style="color: #8b5cf6;">Balance</span>, a medical billing
-            platform.
+            <span style="color: oklch(64% .204 222);">B1 Marketing Group</span> I'm developing the company's
+            software and tooling from the ground up. I'm also CTO and co-founder of
+            <span style="color: #8b5cf6;">Balance</span>, a medical billing platform.
           </p>
           <p>
-            I'm right at home between the technical and business side
-            of things, and understanding what drives each helps me
-            build better products.
+            I'm right at home between the technical and business side of things, and understanding
+            what drives each helps me build better products.
           </p>
           <p>
-            Outside of work I spend most of my time with my wife, our
-            daughter, and two Labs who think they run the house...
-            they're probably right. Big on sushi, hoops, and gaming.
+            Outside of work I spend most of my time with my wife, our daughter, and two Labs who
+            think they run the house... they're probably right. Big on sushi, hoops, and gaming.
           </p>
         </div>
       </div>

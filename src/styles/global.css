@@ -1,58 +1,57 @@
+/* Global entry point — composes Tailwind, fonts, tokens, base styles, and partials. */
+
 @import "tailwindcss";
 
-/* Fonts — self-hosted via @fontsource */
-@import "@fontsource/outfit/400.css";
-@import "@fontsource/outfit/500.css";
-@import "@fontsource/outfit/600.css";
+/* Body font — self-hosted for explicit preload */
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/outfit-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/outfit-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/outfit-latin-600-normal.woff2") format("woff2");
+}
+
 @import "@fontsource/space-mono/400.css";
 @import "@fontsource/space-mono/700.css";
 @import "@fontsource/press-start-2p/400.css";
 
-/* Atmosphere & retro layers */
 @import "./atmosphere.css";
 @import "./retro.css";
 
-/*
- * Design tokens — domain-evocative naming
- * Derived from the retro gaming world:
- * CRT monitors, arcade cabinets, terminal sessions
- */
-
+/* Design tokens — retro gaming domain (CRT, arcade, terminal) */
 @theme {
-  /* Surfaces — powered-off CRT to raised panel */
   --color-screen-void: #08080f;
   --color-screen-dark: #0e0e18;
   --color-screen-panel: #161625;
   --color-screen-raised: #1e1e30;
 
-  /* Text hierarchy */
   --color-text-bright: #e8e8f0;
   --color-text-muted: #8888a0;
   --color-text-faint: #757590;
 
-  /* Accents — terminal phosphor, arcade neon, CRT glow */
   --color-glow-primary: #3b82f6;
   --color-neon-cyan: #00e5ff;
   --color-neon-magenta: #ff2d6f;
   --color-phosphor: #39ff14;
 
-  /* Font families */
   --font-body: "Outfit", system-ui, sans-serif;
   --font-mono: "Space Mono", ui-monospace, monospace;
   --font-pixel: "Press Start 2P", monospace;
 
-  /*
-   * Z-index scale — layered from back to front
-   *
-   *   0        Default / glow pools
-   *  10        Content (hero z-10)
-   *  50        Nav bar
-   *  99        Atmosphere scanlines
-   * 100        Atmosphere grain
-   * 150        Achievements toast, Konami banner, achievement dropdown
-   * 180        Terminal modal
-   * 200        Boot sequence
-   */
   --z-nav: 50;
   --z-atmosphere-scanlines: 99;
   --z-atmosphere-grain: 100;
@@ -61,7 +60,7 @@
   --z-boot: 200;
 }
 
-/* Base styles */
+/* Base */
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;
@@ -82,27 +81,25 @@ body {
   color: var(--color-text-bright);
 }
 
-/* Scrollbar styling for dark theme */
 ::-webkit-scrollbar {
   width: 8px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--color-screen-void);
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--color-screen-raised);
   border-radius: 4px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-text-faint);
 }
 
-/* Respect user motion preferences */
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -110,19 +107,15 @@ body {
   }
 }
 
-/* Focus visibility — keyboard navigation */
 :focus-visible {
   outline: 2px solid var(--color-glow-primary);
   outline-offset: 3px;
   border-radius: 2px;
 }
-
-/* Remove outline for mouse clicks (keep for keyboard) */
 :focus:not(:focus-visible) {
   outline: none;
 }
 
-/* Skip to content link — visually hidden until focused */
 .skip-link {
   position: absolute;
   top: -40px;
@@ -138,7 +131,45 @@ body {
   text-decoration: none;
   transition: top 0.2s;
 }
-
 .skip-link:focus {
   top: 1rem;
+}
+
+/* Print */
+@media print {
+  html,
+  body {
+    background: white;
+    color: black;
+  }
+  .atmosphere-grain::before,
+  .atmosphere-scanlines::after,
+  .glow-pool,
+  nav,
+  .skip-link {
+    display: none;
+  }
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  a[href^="http"]::after,
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+  }
+  .section-header {
+    color: #333;
+    border-bottom: 1px solid #999;
+    padding-bottom: 0.25rem;
+  }
+  .pixel-tag {
+    background: white;
+    color: black;
+    border: 1px solid #333;
+  }
+  section {
+    page-break-inside: avoid;
+  }
 }
