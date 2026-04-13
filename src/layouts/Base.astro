@@ -105,34 +105,37 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
   <body class="atmosphere-grain atmosphere-scanlines min-h-screen">
     <slot />
 
-    <!-- Console easter egg -->
+    <!-- Console easter egg — deferred so the styled console.logs don't land
+         on the main thread during hydration. -->
     <script is:inline>
-      console.log(
-        "%c" +
-          "  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗██╗  ██╗\n" +
-          "  ████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║  ██║\n" +
-          "  ██╔████╔██║███████║██████╔╝██║██║     ███████║\n" +
-          "  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║     ██╔══██║\n" +
-          "  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╗██║  ██║\n" +
-          "  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝",
-        "color: #3b82f6; font-family: monospace; font-size: 10px;",
-      );
-      console.log(
-        "%cYou opened the console. A person of culture, I see.",
-        "color: #8888a0; font-family: monospace; font-size: 12px; padding: 4px 0;",
-      );
-      console.log(
-        "%cHint: try the Konami Code, or press Ctrl + ` for more fun.",
-        "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;",
-      );
-      console.log(
-        "%cBuilt with Astro 6, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
-        "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;",
-      );
-      console.log(
-        "%cLooking to collaborate? → andrew@marich.dev",
-        "color: #3b82f6; font-family: monospace; font-size: 11px; padding: 4px 0;",
-      );
+      setTimeout(() => {
+        console.log(
+          "%c" +
+            "  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗██╗  ██╗\n" +
+            "  ████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║  ██║\n" +
+            "  ██╔████╔██║███████║██████╔╝██║██║     ███████║\n" +
+            "  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║     ██╔══██║\n" +
+            "  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╗██║  ██║\n" +
+            "  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝",
+          "color: #3b82f6; font-family: monospace; font-size: 10px;",
+        );
+        console.log(
+          "%cYou opened the console. A person of culture, I see.",
+          "color: #8888a0; font-family: monospace; font-size: 12px; padding: 4px 0;",
+        );
+        console.log(
+          "%cHint: try the Konami Code, or press Ctrl + ` for more fun.",
+          "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;",
+        );
+        console.log(
+          "%cBuilt with Astro 6, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
+          "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;",
+        );
+        console.log(
+          "%cLooking to collaborate? → andrew@marich.dev",
+          "color: #3b82f6; font-family: monospace; font-size: 11px; padding: 4px 0;",
+        );
+      }, 0);
     </script>
   </body>
 </html>
