@@ -11,9 +11,10 @@ export default defineConfig({
   integrations: [react(), sitemap({ filter: (page) => !page.includes("/secret") })],
 
   build: {
-    // Inline all stylesheets into <style> tags to eliminate render-blocking CSS requests.
-    // The site is small and single-page so we accept the per-page HTML cost for the LCP win.
-    inlineStylesheets: "always",
+    // "auto" inlines only small stylesheets (<4 KB by default). Keeps the larger
+    // Tailwind bundle external so HTML and CSS can download in parallel over
+    // HTTP/2 — tested faster on Slow 4G than fully-inlining "always".
+    inlineStylesheets: "auto",
   },
 
   vite: {
