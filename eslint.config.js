@@ -5,7 +5,16 @@ import jsxA11y from "eslint-plugin-jsx-a11y";
 import reactHooks from "eslint-plugin-react-hooks";
 
 export default [
-  { ignores: ["dist/**", ".astro/**", "node_modules/**", ".wrangler/**", "public/**"] },
+  {
+    ignores: [
+      "dist/**",
+      ".astro/**",
+      "node_modules/**",
+      ".wrangler/**",
+      ".worktrees/**",
+      "public/**",
+    ],
+  },
   {
     languageOptions: {
       globals: {
