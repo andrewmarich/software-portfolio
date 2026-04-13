@@ -11,8 +11,9 @@ export default defineConfig({
   integrations: [react(), sitemap({ filter: (page) => !page.includes("/secret") })],
 
   build: {
-    // Inline small stylesheets into <style> tags to eliminate render-blocking CSS requests.
-    inlineStylesheets: "auto",
+    // Inline all stylesheets into <style> tags to eliminate render-blocking CSS requests.
+    // The site is small and single-page so we accept the per-page HTML cost for the LCP win.
+    inlineStylesheets: "always",
   },
 
   vite: {
