@@ -1,17 +1,105 @@
 ---
-
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import About from "../components/About.astro";
+import Projects from "../components/Projects.astro";
+import Experience from "../components/Experience.astro";
+import Skills from "../components/Skills.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
+import SectionDivider from "../components/SectionDivider.astro";
+import BootSequence from "../islands/BootSequence";
+import Achievements from "../islands/Achievements";
+import KonamiCode from "../islands/KonamiCode";
+import Terminal from "../islands/Terminal";
+import { ACHIEVEMENTS } from "../islands/achievement-data";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Base>
+  <BootSequence client:load />
+  <Achievements achievements={ACHIEVEMENTS} client:idle />
+  <KonamiCode client:idle />
+  <Terminal client:idle />
+
+  <a href="#main-content" class="skip-link">Skip to content</a>
+
+  <Nav />
+  <main id="main-content" class="pt-14">
+    <Hero />
+
+    <div class="reveal-section">
+      <SectionDivider />
+      <About />
+    </div>
+
+    <div class="reveal-section">
+      <SectionDivider />
+      <Projects />
+    </div>
+
+    <div class="reveal-section">
+      <SectionDivider />
+      <Experience />
+    </div>
+
+    <div class="reveal-section">
+      <SectionDivider />
+      <Skills />
+    </div>
+
+    <div class="reveal-section">
+      <SectionDivider />
+      <Contact />
+    </div>
+  </main>
+  <Footer />
+</Base>
+
+<style>
+  .reveal-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 0.7s ease-out,
+      transform 0.7s ease-out;
+  }
+
+  .reveal-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Staggered children within revealed sections */
+  .reveal-section .stagger-child {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity 0.5s ease-out,
+      transform 0.5s ease-out;
+  }
+
+  .reveal-section.visible .stagger-child {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: calc(var(--stagger, 0) * 120ms);
+  }
+</style>
+
+<script>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: "0px 0px -40px 0px" },
+  );
+
+  document.querySelectorAll(".reveal-section").forEach((el) => {
+    observer.observe(el);
+  });
+</script>

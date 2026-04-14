@@ -1,0 +1,85 @@
+/*
+ * Print styles — ink-friendly rendering for Cmd+P / "Save as PDF".
+ *
+ * Strategy:
+ *   1. Re-point the design tokens to print colors. Because every Tailwind
+ *      utility in this project resolves a var(--color-*), overriding the
+ *      tokens once cascades ink-appropriate colors through the entire UI.
+ *   2. Unhide scroll-reveal sections (they start at opacity:0 and rely on
+ *      IntersectionObserver, which does not fire during a print capture).
+ *   3. Hide chrome and overlay islands — browsers otherwise repeat
+ *      position:fixed elements on every printed page. Overlays are matched
+ *      by ARIA role (status / dialog / presentation).
+ *   4. Expand link URLs inline so the printed page stays useful on paper.
+ */
+
+@media print {
+  :root {
+    --color-screen-void: #ffffff;
+    --color-screen-dark: #ffffff;
+    --color-screen-panel: #ffffff;
+    --color-screen-raised: #bbbbbb;
+
+    --color-text-bright: #000000;
+    --color-text-muted: #222222;
+    --color-text-faint: #444444;
+
+    --color-glow-primary: #0044aa;
+    --color-neon-cyan: #006688;
+    --color-neon-magenta: #aa0066;
+  }
+
+  html,
+  body {
+    background: white;
+    color: black;
+  }
+
+  /* !important beats Astro's data-astro-cid scoped selectors in index.astro. */
+  .reveal-section,
+  .reveal-section .stagger-child {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  nav,
+  .skip-link,
+  .glow-pool,
+  .atmosphere-grain::before,
+  .atmosphere-scanlines::after,
+  .cursor-blink::after,
+  [role="status"],
+  [role="dialog"],
+  [role="presentation"] {
+    display: none !important;
+  }
+
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  a[href^="http"]::after,
+  a[href^="mailto:"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #555;
+  }
+
+  .section-header {
+    border-bottom: 1px solid #999;
+    padding-bottom: 0.25rem;
+  }
+
+  .pixel-tag {
+    border: 1px solid #333;
+  }
+
+  section,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}

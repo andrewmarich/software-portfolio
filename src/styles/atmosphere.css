@@ -1,0 +1,103 @@
+/* Atmospheric layers — grain, scanlines, dot grid, and ambient glow pools. */
+
+.atmosphere-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-atmosphere-grain);
+  pointer-events: none;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+.atmosphere-scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-atmosphere-scanlines);
+  pointer-events: none;
+  opacity: 0.03;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.3) 2px,
+    rgba(0, 0, 0, 0.3) 4px
+  );
+}
+
+.atmosphere-dots {
+  background-image: radial-gradient(circle, var(--color-text-faint) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+  background-position: center;
+}
+
+/* Glow pools — combine one color modifier with one position modifier */
+.glow-pool {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+@media (min-width: 768px) {
+  .glow-pool {
+    filter: blur(120px);
+  }
+}
+
+.glow-pool--primary {
+  background: var(--color-glow-primary);
+  opacity: 0.06;
+}
+.glow-pool--cyan {
+  background: var(--color-neon-cyan);
+  opacity: 0.04;
+}
+.glow-pool--magenta {
+  background: var(--color-neon-magenta);
+  opacity: 0.03;
+}
+
+.glow-pool--top-right {
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  transform: scale(0.55);
+}
+.glow-pool--bottom-left {
+  bottom: -50px;
+  left: -150px;
+  width: 400px;
+  height: 400px;
+  transform: scale(0.55);
+}
+.glow-pool--right-center {
+  top: 50%;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  transform: translateY(-50%) scale(0.55);
+}
+.glow-pool--left-center {
+  top: 50%;
+  left: -200px;
+  width: 500px;
+  height: 500px;
+  transform: translateY(-50%) scale(0.55);
+}
+
+@media (min-width: 768px) {
+  .glow-pool--top-right,
+  .glow-pool--bottom-left {
+    transform: none;
+  }
+  .glow-pool--right-center,
+  .glow-pool--left-center {
+    transform: translateY(-50%);
+  }
+}

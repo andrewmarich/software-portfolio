@@ -1,0 +1,141 @@
+---
+import "../styles/global.css";
+import { personSchema } from "../lib/person-schema";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Andrew Marich — Full-Stack Engineer",
+  description = "Full-stack engineer building scalable systems across the stack. React, Django, TypeScript, cloud infrastructure.",
+} = Astro.props;
+
+const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
+---
+
+<!doctype html>
+<!--
+
+    ██╗  ██╗███████╗██╗   ██╗
+    ██║  ██║██╔════╝╚██╗ ██╔╝
+    ███████║█████╗   ╚████╔╝
+    ██╔══██║██╔══╝    ╚██╔╝
+    ██║  ██║███████╗   ██║
+    ╚═╝  ╚═╝╚══════╝   ╚═╝
+
+    You're viewing the source. Respect.
+
+    Built with Astro, React, Tailwind CSS, and way too much coffee.
+    Deployed on Cloudflare Pages.
+
+    Found something interesting? Try:
+      - The Konami Code
+      - Ctrl + `
+      - /secret
+
+    Or just email me: andrew@marich.dev
+
+-->
+<html lang="en" data-built-by="andrew-marich" data-vibe="retro">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16.png" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.url.href} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={Astro.url.href} />
+    <meta property="og:image" content={new URL("/images/og-image.jpg", Astro.site)} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Andrew Marich — Full-Stack Engineer" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={new URL("/images/og-image.jpg", Astro.site)} />
+
+    <meta name="theme-color" content="#08080f" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+
+    <!-- Preload body font to eliminate FOUT on initial paint -->
+    <link
+      rel="preload"
+      href="/fonts/outfit-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="/fonts/outfit-latin-600-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
+
+    <!-- Structured data — Person schema -->
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+
+    <!-- For the curious -->
+    <link rel="author" href="/humans.txt" />
+
+    {
+      cfAnalyticsToken && (
+        <script
+          defer
+          src="https://static.cloudflareinsights.com/beacon.min.js"
+          data-cf-beacon={`{"token": "${cfAnalyticsToken}"}`}
+        />
+      )
+    }
+  </head>
+  <body class="atmosphere-grain atmosphere-scanlines min-h-screen">
+    <slot />
+
+    <!-- Console easter egg — deferred so the styled console.logs don't land
+         on the main thread during hydration. -->
+    <script is:inline>
+      setTimeout(() => {
+        console.log(
+          "%c" +
+            "  ███╗   ███╗ █████╗ ██████╗ ██╗ ██████╗██╗  ██╗\n" +
+            "  ████╗ ████║██╔══██╗██╔══██╗██║██╔════╝██║  ██║\n" +
+            "  ██╔████╔██║███████║██████╔╝██║██║     ███████║\n" +
+            "  ██║╚██╔╝██║██╔══██║██╔══██╗██║██║     ██╔══██║\n" +
+            "  ██║ ╚═╝ ██║██║  ██║██║  ██║██║╚██████╗██║  ██║\n" +
+            "  ╚═╝     ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝ ╚═════╝╚═╝  ╚═╝",
+          "color: #3b82f6; font-family: monospace; font-size: 10px;",
+        );
+        console.log(
+          "%cYou opened the console. A person of culture, I see.",
+          "color: #8888a0; font-family: monospace; font-size: 12px; padding: 4px 0;",
+        );
+        console.log(
+          "%cHint: try the Konami Code, or press Ctrl + ` for more fun.",
+          "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;",
+        );
+        console.log(
+          "%cBuilt with Astro 6, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
+          "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;",
+        );
+        console.log(
+          "%cLooking to collaborate? → andrew@marich.dev",
+          "color: #3b82f6; font-family: monospace; font-size: 11px; padding: 4px 0;",
+        );
+      }, 0);
+    </script>
+  </body>
+</html>

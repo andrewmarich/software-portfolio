@@ -1,0 +1,64 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+interface SkillGroup {
+  label: string;
+  skills: string[];
+}
+
+const groups: SkillGroup[] = [
+  {
+    label: "Frontend",
+    skills: ["TypeScript", "React", "TanStack", "Tailwind CSS", "HTMX", "Bootstrap", "Astro"],
+  },
+  {
+    label: "Backend",
+    skills: ["Python", "Django", "Node.js", "PostgreSQL", "Redis", "Drizzle ORM"],
+  },
+  {
+    label: "Infrastructure",
+    skills: ["AWS", "GCP", "Cloudflare", "Docker", "Terraform"],
+  },
+  {
+    label: "Integrations",
+    skills: ["Stripe", "Twilio", "HubSpot", "DocuSign"],
+  },
+  {
+    label: "AI Tooling",
+    skills: ["Claude Code", "ChatGPT / Codex", "Warp", "Local LLMs"],
+  },
+  {
+    label: "Tools",
+    skills: ["Git", "GitHub", "GitLab", "CI/CD", "Bun", "Linear", "Notion", "Asana", "Trello"],
+  },
+];
+---
+
+<section
+  id="skills"
+  class="section-padding-tight relative overflow-hidden"
+  aria-labelledby="skills-heading"
+>
+  <div class="glow-pool glow-pool--cyan glow-pool--left-center"></div>
+
+  <div class="mx-auto max-w-6xl px-6">
+    <SectionHeader id="skills" label="ls skills/" />
+
+    <div class="grid gap-8 sm:grid-cols-2">
+      {
+        groups.map((group, i) => (
+          <div class="stagger-child" style={`--stagger: ${i}`}>
+            <h3 class="text-text-faint mb-4 font-mono text-sm tracking-wider uppercase">
+              [{group.label}]
+            </h3>
+            <div class="flex flex-wrap gap-2">
+              {group.skills.map((skill) => (
+                <span class="pixel-tag rounded">{skill}</span>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

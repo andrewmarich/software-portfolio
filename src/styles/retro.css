@@ -1,0 +1,202 @@
+/* Retro effects, design utilities, and the Konami-code retro mode override. */
+
+.cursor-blink::after {
+  content: "█";
+  color: var(--color-glow-primary);
+  animation: blink 1s step-end infinite;
+  margin-left: 2px;
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* CRT */
+.crt-vignette {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-vignette::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.5);
+}
+
+.crt-hover {
+  position: relative;
+  overflow: hidden;
+}
+
+.crt-hover::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.15) 2px,
+    rgba(0, 0, 0, 0.15) 4px
+  );
+}
+
+.crt-hover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+.crt-hover:hover::before,
+.crt-hover:hover::after {
+  opacity: 1;
+}
+
+/* Glow */
+.glow-hover {
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.glow-hover:hover {
+  box-shadow: 0 0 20px color-mix(in oklch, var(--color-glow-primary), transparent 75%);
+  border-color: color-mix(in oklch, var(--color-glow-primary), transparent 50%);
+}
+
+/* Per-element accent glow — reads --accent-rgb from inline style */
+[data-hover-glow] {
+  transition:
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+[data-hover-glow]:hover {
+  box-shadow: 0 0 30px rgba(var(--accent-rgb), 0.08);
+  border-color: rgba(var(--accent-rgb), 0.3);
+}
+
+.glow-text--primary {
+  text-shadow:
+    0 0 10px var(--color-glow-primary),
+    0 0 30px color-mix(in oklch, var(--color-glow-primary), transparent 70%);
+}
+
+.glow-underline {
+  text-decoration: none;
+  background-image: linear-gradient(var(--color-glow-primary), var(--color-glow-primary));
+  background-size: 0% 1px;
+  background-position: 0% 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.3s ease;
+}
+
+.glow-underline:hover {
+  background-size: 100% 1px;
+  text-shadow: 0 0 8px color-mix(in oklch, var(--color-glow-primary), transparent 60%);
+}
+
+/* Section layout */
+.section-header {
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-weight: normal;
+  margin: 0;
+}
+
+.section-padding {
+  padding-block: 4rem;
+}
+@media (min-width: 640px) {
+  .section-padding {
+    padding-block: 6rem;
+  }
+}
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-block: 8rem;
+  }
+}
+
+.section-padding-tight {
+  padding-block: 4rem;
+}
+@media (min-width: 1024px) {
+  .section-padding-tight {
+    padding-block: 6rem;
+  }
+}
+
+/* Pixel tag — slightly larger on mobile for readability */
+.pixel-tag {
+  font-family: var(--font-pixel);
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid color-mix(in oklch, var(--color-screen-raised), transparent 20%);
+  background: color-mix(in oklch, var(--color-screen-panel), transparent 60%);
+  color: var(--color-text-muted);
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .pixel-tag {
+    font-size: 0.5rem;
+    padding: 0.3rem 0.6rem;
+  }
+}
+
+.pixel-tag:hover {
+  color: var(--color-glow-primary);
+  border-color: color-mix(in oklch, var(--color-glow-primary), transparent 60%);
+  background: color-mix(in oklch, var(--color-glow-primary), transparent 92%);
+}
+
+/* Retro mode — Konami code (↑↑↓↓←→←→BA): phosphor green, monospace, heavy CRT */
+:root.retro-mode {
+  --color-text-bright: #39ff14;
+  --color-text-muted: #2ab80e;
+  --color-text-faint: #1a7a0a;
+  --color-glow-primary: #39ff14;
+  --color-neon-cyan: #39ff14;
+  --color-neon-magenta: #39ff14;
+}
+
+.retro-mode body {
+  font-family: var(--font-mono) !important;
+}
+
+.retro-mode .atmosphere-grain::before,
+.retro-mode .atmosphere-scanlines::after {
+  opacity: 0.08;
+}
+
+.retro-mode * {
+  border-radius: 0 !important;
+}
+
+.retro-mode img,
+.retro-mode .crt-vignette {
+  filter: grayscale(1) brightness(0.8) contrast(1.2);
+}

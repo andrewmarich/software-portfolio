@@ -1,0 +1,14 @@
+---
+interface Props {
+  id: string;
+  label: string;
+  class?: string;
+}
+
+const { id, label, class: className = "mb-12" } = Astro.props;
+---
+
+<h2 id={`${id}-heading`} class:list={["section-header", className]}>
+  <span class="text-glow-primary" aria-hidden="true">&gt;</span>
+  {label}
+</h2>

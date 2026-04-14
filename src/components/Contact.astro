@@ -1,0 +1,56 @@
+---
+import SectionHeader from "./SectionHeader.astro";
+
+const links = [
+  {
+    label: "Email",
+    href: "mailto:andrew@marich.dev",
+    display: "andrew@marich.dev",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/andrewmarich",
+    display: "github.com/andrewmarich",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://linkedin.com/in/andrewmarich",
+    display: "linkedin.com/in/andrewmarich",
+  },
+];
+---
+
+<section id="contact" class="section-padding-tight relative" aria-labelledby="contact-heading">
+  <div class="mx-auto max-w-6xl px-6">
+    <SectionHeader id="contact" label="ping andrew" class="mb-6" />
+
+    <p class="text-text-bright mb-4 text-3xl font-semibold sm:text-4xl">Let's build something.</p>
+
+    <p class="text-text-muted mb-10 max-w-lg leading-relaxed">
+      Got a project in mind, a role to fill, or just want to talk tech? Reach out.
+    </p>
+
+    <div class="space-y-4">
+      {
+        links.map((link) => {
+          const isExternal = !link.href.startsWith("mailto");
+          return (
+            <div class="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
+              <span class="text-text-faint mb-1 font-mono text-xs tracking-wider uppercase sm:mb-0 sm:w-20 sm:shrink-0">
+                {link.label}
+              </span>
+              <a
+                href={link.href}
+                target={isExternal ? "_blank" : undefined}
+                rel={isExternal ? "noopener noreferrer" : undefined}
+                class="text-text-muted glow-underline font-mono text-sm break-all sm:break-normal"
+              >
+                {link.display}
+              </a>
+            </div>
+          );
+        })
+      }
+    </div>
+  </div>
+</section>

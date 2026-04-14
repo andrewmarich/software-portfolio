@@ -1,0 +1,33 @@
+/* TEAM */
+
+Developer: Andrew Marich
+Role: Full-Stack Engineer, CTO & Co-founder at Balance
+Location: Gilbert, AZ
+Contact: andrew@marich.dev
+GitHub: github.com/andrewmarich
+LinkedIn: linkedin.com/in/andrewmarich
+
+/* THANKS */
+
+Coffee: for existing
+Retro games: for the aesthetic inspiration
+My daughter & two Labs: for keeping me grounded
+
+/* SITE */
+
+Framework: Astro 6
+Islands: React 19
+Styling: Tailwind CSS 4
+Fonts: Outfit, Space Mono, Press Start 2P
+Hosting: Cloudflare Pages
+Runtime: Bun
+Last updated: 2026
+
+/* EASTER EGGS */
+
+Found: ??/??
+Hint: ↑↑↓↓←→←→BA
+Hint: Ctrl + `
+Hint: /secret
+Hint: Check the console
+Hint: View the source

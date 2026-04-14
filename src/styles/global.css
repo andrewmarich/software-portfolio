@@ -1,0 +1,137 @@
+/* Global entry point — composes Tailwind, fonts, tokens, base styles, and partials. */
+
+@import "tailwindcss";
+
+/* Body font — self-hosted for explicit preload */
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/outfit-latin-400-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("/fonts/outfit-latin-500-normal.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Outfit";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("/fonts/outfit-latin-600-normal.woff2") format("woff2");
+}
+
+@import "@fontsource/space-mono/400.css";
+@import "@fontsource/space-mono/700.css";
+@import "@fontsource/press-start-2p/400.css";
+
+@import "./atmosphere.css";
+@import "./retro.css";
+@import "./print.css";
+
+/* Design tokens — retro gaming domain (CRT, arcade, terminal) */
+@theme {
+  --color-screen-void: #08080f;
+  --color-screen-dark: #0e0e18;
+  --color-screen-panel: #161625;
+  --color-screen-raised: #1e1e30;
+
+  --color-text-bright: #e8e8f0;
+  --color-text-muted: #9a9ab5;
+  --color-text-faint: #b0b0c8;
+
+  --color-glow-primary: #3b82f6;
+  --color-neon-cyan: #00e5ff;
+  --color-neon-magenta: #ff2d6f;
+  --color-phosphor: #39ff14;
+
+  --font-body: "Outfit", system-ui, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --font-pixel: "Press Start 2P", monospace;
+
+  --z-nav: 50;
+  --z-atmosphere-scanlines: 99;
+  --z-atmosphere-grain: 100;
+  --z-overlay: 150;
+  --z-terminal: 180;
+  --z-boot: 200;
+}
+
+/* Base */
+html {
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-screen-raised) var(--color-screen-void);
+  overflow-x: clip;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-screen-void);
+  color: var(--color-text-bright);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: color-mix(in oklch, var(--color-glow-primary), transparent 70%);
+  color: var(--color-text-bright);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-screen-void);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-screen-raised);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-faint);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-glow-primary);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 1rem;
+  z-index: 1000;
+  padding: 0.5rem 1rem;
+  background: var(--color-screen-panel);
+  color: var(--color-glow-primary);
+  border: 1px solid var(--color-glow-primary);
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-decoration: none;
+  transition: top 0.2s;
+}
+.skip-link:focus {
+  top: 1rem;
+}
