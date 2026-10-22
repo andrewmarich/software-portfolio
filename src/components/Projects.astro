@@ -1,8 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import leadsDashboard from "../assets/images/leads-dashboard.webp";
-import balanceDashboard from "../assets/images/balance-dashboard.webp";
-import portfolioScreenshot from "../assets/images/portfolio-screenshot.webp";
+import balanceDashboard from "../assets/images/balance-dashboard.png";
+import portfolioScreenshot from "../assets/images/portfolio-screenshot.png";
 import SectionHeader from "./SectionHeader.astro";
 
 interface Project {
@@ -17,31 +17,31 @@ interface Project {
 
 const projects: Project[] = [
   {
-    name: "Lead Validation Engine",
+    name: "Claimant Qualification Platform",
     subtitle: "B1 Marketing Group",
     description:
-      "Lead intake and routing system for legal services. Call center agents fill out dynamic forms, the system validates and enriches data through third-party APIs, then routes qualified leads to the right vendors. Built with HIPAA compliance baked in.",
-    tags: ["Django", "PostgreSQL", "HTMX", "Bootstrap", "AWS", "Docker", "Redis", "DocuSign"],
+      "Qualifies prospective legal claimants and delivers client-ready packages to law firms. Agents work in dynamic forms, the system validates and enriches data through third-party APIs, then assembles reports, signed retainers, and evidence into a single package. Grew into a multi-tenant SaaS with MFA and usage reporting.",
+    tags: ["Python", "Django", "HTMX", "PostgreSQL", "AWS", "Terraform", "Redis", "DocuSign"],
     image: leadsDashboard,
     accent: "oklch(64% .204 222)",
     accentRgb: "14,165,233",
   },
   {
-    name: "Medical Billing Platform",
-    subtitle: "Balance",
+    name: "Patient Billing Platform",
+    subtitle: "Balance Health",
     description:
-      "Accounts receivable platform for medical and dental practices. Handles invoicing, payment collection through Stripe, patient follow-ups via SMS, and bulk operations. Runs on the edge through Cloudflare Workers.",
-    tags: ["React", "TanStack", "PostgreSQL", "Cloudflare Workers", "GCP", "Stripe", "Twilio"],
+      "Patient billing for healthcare practices. Matches patients to statements, sends email and SMS payment requests, and handles checkout with partial payments, Apple Pay, and Stripe Link. Rebuilt from an unlaunched prototype as sole engineer; now serves 41 practices.",
+    tags: ["React", "TanStack Start", "PostgreSQL", "Google Cloud", "Stripe"],
     image: balanceDashboard,
-    accent: "#8b5cf6",
-    accentRgb: "139,92,246",
+    accent: "#3aa769",
+    accentRgb: "58,167,105",
   },
   {
     name: "Software Portfolio",
     subtitle: "marich.dev",
     description:
       "The site you're on right now. Mostly static with React islands where interactivity matters. Has a few things hidden around if you like poking at websites.",
-    tags: ["Astro", "React", "TypeScript", "Tailwind CSS 4", "Cloudflare Pages"],
+    tags: ["Astro", "React", "TypeScript", "Tailwind CSS 4", "Cloudflare"],
     image: portfolioScreenshot,
     accent: "#ff2d6f",
     accentRgb: "255,45,111",

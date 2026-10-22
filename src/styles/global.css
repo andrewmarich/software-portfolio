@@ -62,6 +62,11 @@
 }
 
 /* Base */
+/* Anchor jumps land below the fixed nav instead of under it. */
+section[id] {
+  scroll-margin-top: 2rem;
+}
+
 html {
   scroll-behavior: smooth;
   scrollbar-width: thin;

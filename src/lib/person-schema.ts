@@ -12,7 +12,7 @@ export const personSchema = {
   alternateName: "marich",
   jobTitle: "Full-Stack Engineer",
   description:
-    "Full-stack engineer specializing in cloud infrastructure, internal tooling, and user interfaces. CTO & Co-Founder of Balance.",
+    "Full-stack engineer who builds products and leads the engineering behind them. Co-Founder & CTO of Balance Health.",
   url: "https://marich.dev",
   email: "mailto:andrew@marich.dev",
   image: "https://marich.dev/images/profile.webp",
@@ -29,7 +29,7 @@ export const personSchema = {
   ],
   worksFor: {
     "@type": "Organization",
-    name: "B1 Marketing Group",
+    name: "Balance Health",
   },
   knowsAbout: [
     "Full-Stack Development",
@@ -38,9 +38,10 @@ export const personSchema = {
     "Python",
     "Django",
     "Cloud Infrastructure",
-    "Cloudflare Workers",
     "AWS",
-    "GCP",
+    "Google Cloud",
+    "Terraform",
+    "HTMX",
     "System Architecture",
   ],
 } as const;

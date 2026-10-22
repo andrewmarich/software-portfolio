@@ -8,8 +8,8 @@ interface Props {
 }
 
 const {
-  title = "Andrew Marich — Full-Stack Engineer",
-  description = "Full-stack engineer building scalable systems across the stack. React, Django, TypeScript, cloud infrastructure.",
+  title = "Andrew Marich | Full-Stack Software Engineer",
+  description = "Full-stack engineer who builds products and leads the engineering behind them. React, Django, TypeScript, AWS, Google Cloud.",
 } = Astro.props;
 
 const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
@@ -28,7 +28,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     You're viewing the source. Respect.
 
     Built with Astro, React, Tailwind CSS, and way too much coffee.
-    Deployed on Cloudflare Pages.
+    Deployed on Cloudflare.
 
     Found something interesting? Try:
       - The Konami Code
@@ -59,7 +59,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
     <meta property="og:image" content={new URL("/images/og-image.jpg", Astro.site)} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Andrew Marich — Full-Stack Engineer" />
+    <meta property="og:image:alt" content="Andrew Marich, full-stack engineer. marich.dev" />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -128,7 +128,7 @@ const cfAnalyticsToken = import.meta.env.PUBLIC_CF_ANALYTICS_TOKEN;
           "color: #00e5ff; font-family: monospace; font-size: 11px; padding: 2px 0;",
         );
         console.log(
-          "%cBuilt with Astro 6, React 19, Tailwind CSS 4, and deployed on Cloudflare Pages.",
+          "%cBuilt with Astro 6, React 19, Tailwind CSS 4, and deployed on Cloudflare.",
           "color: #4a4a60; font-family: monospace; font-size: 10px; padding: 2px 0;",
         );
         console.log(
