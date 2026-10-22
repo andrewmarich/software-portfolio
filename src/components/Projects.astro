@@ -1,7 +1,7 @@
 ---
 import { Image } from "astro:assets";
-import leadsDashboard from "../assets/images/leads-dashboard.webp";
 import balanceDashboard from "../assets/images/balance-dashboard.png";
+import qualificationOverview from "../assets/images/b1-qualification-overview.png";
 import portfolioScreenshot from "../assets/images/portfolio-screenshot.png";
 import SectionHeader from "./SectionHeader.astro";
 
@@ -11,21 +11,12 @@ interface Project {
   description: string;
   tags: string[];
   image: ImageMetadata;
+  alt: string;
   accent: string;
   accentRgb: string;
 }
 
 const projects: Project[] = [
-  {
-    name: "Claimant Qualification Platform",
-    subtitle: "B1 Marketing Group",
-    description:
-      "Qualifies prospective legal claimants and delivers client-ready packages to law firms. Agents work in dynamic forms, the system validates and enriches data through third-party APIs, then assembles reports, signed retainers, and evidence into a single package. Grew into a multi-tenant SaaS with MFA and usage reporting.",
-    tags: ["Python", "Django", "HTMX", "PostgreSQL", "AWS", "Terraform", "Redis", "DocuSign"],
-    image: leadsDashboard,
-    accent: "oklch(64% .204 222)",
-    accentRgb: "14,165,233",
-  },
   {
     name: "Patient Billing Platform",
     subtitle: "Balance Health",
@@ -33,8 +24,20 @@ const projects: Project[] = [
       "Patient billing for healthcare practices. Matches patients to statements, sends email and SMS payment requests, and handles checkout with partial payments, Apple Pay, and Stripe Link. Rebuilt from an unlaunched prototype as sole engineer; now serves 41 practices.",
     tags: ["React", "TanStack Start", "PostgreSQL", "Google Cloud", "Stripe"],
     image: balanceDashboard,
+    alt: "Patient Billing Platform invoice dashboard with synthetic data",
     accent: "#3aa769",
     accentRgb: "58,167,105",
+  },
+  {
+    name: "Claimant Qualification Platform",
+    subtitle: "B1 Marketing Group",
+    description:
+      "Qualifies prospective legal claimants and delivers client-ready packages to law firms. Agents work in dynamic forms, the system validates and enriches data through third-party APIs, then assembles reports, signed retainers, and evidence into a single package. Grew into a multi-tenant SaaS with MFA and usage reporting.",
+    tags: ["Python", "Django", "HTMX", "PostgreSQL", "AWS", "Terraform", "Redis", "DocuSign"],
+    image: qualificationOverview,
+    alt: "Diagram of the qualification platform in three steps: capture claimant details with dynamic forms; qualify and sign with campaign rules, identity checks, and e-signature; deliver one merged client-ready package.",
+    accent: "oklch(64% .204 222)",
+    accentRgb: "14,165,233",
   },
   {
     name: "Software Portfolio",
@@ -43,6 +46,7 @@ const projects: Project[] = [
       "The site you're on right now. Mostly static with React islands where interactivity matters. Has a few things hidden around if you like poking at websites.",
     tags: ["Astro", "React", "TypeScript", "Tailwind CSS 4", "Cloudflare"],
     image: portfolioScreenshot,
+    alt: "Software Portfolio screenshot",
     accent: "#ff2d6f",
     accentRgb: "255,45,111",
   },
@@ -71,7 +75,7 @@ const projects: Project[] = [
               <div class="crt-hover bg-screen-dark border-screen-raised/50 relative w-full shrink-0 overflow-hidden rounded-md border lg:w-80">
                 <Image
                   src={project.image}
-                  alt={`${project.name} screenshot`}
+                  alt={project.alt}
                   widths={[320, 640, 960]}
                   sizes="(min-width: 1024px) 320px, 100vw"
                   class="block h-auto w-full"
