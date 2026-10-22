@@ -1,7 +1,7 @@
 /* TEAM */
 
 Developer: Andrew Marich
-Role: Full-Stack Engineer, CTO & Co-founder at Balance
+Role: Full-Stack Engineer, Co-Founder & CTO at Balance Health
 Location: Gilbert, AZ
 Contact: andrew@marich.dev
 GitHub: github.com/andrewmarich
@@ -19,7 +19,7 @@ Framework: Astro 6
 Islands: React 19
 Styling: Tailwind CSS 4
 Fonts: Outfit, Space Mono, Press Start 2P
-Hosting: Cloudflare Pages
+Hosting: Cloudflare
 Runtime: Bun
 Last updated: 2026
 
